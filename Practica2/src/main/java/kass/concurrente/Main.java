@@ -41,11 +41,16 @@ public class Main {
         String contrasenna = "";
         boolean esCorrecta = false;
         int i = 7;
+        int intentos = 0;
         while (!esCorrecta) {
             contrasenna = genera_contrasennas(i);
             esCorrecta = Cifrar.descifraC(Constante.LLAVE, contrasenna);
             System.out.println("Contrasenna: " + contrasenna + " Es correcta: " + esCorrecta);
-            i++;
+            intentos++;
+            if(intentos == Math.pow(Constante.ALFABETO.length(), i)){
+                i++;
+                intentos = 0;
+            }
         }
         Long fin = System.nanoTime();
         Long total = fin-inicio;
