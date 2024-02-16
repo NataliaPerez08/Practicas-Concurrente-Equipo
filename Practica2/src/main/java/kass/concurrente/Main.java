@@ -14,6 +14,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //calcular_combinaciones(Constante.ALFABETO.length());
         Long inicio = System.nanoTime();
+        System.out.println("Inicio"+inicio);
         secuencial();
         //System.out.println(Cifrar.descifraC(Constante.LLAVE, Constante.CONTRASENNA));
         Long fin = System.nanoTime();
@@ -33,7 +34,7 @@ public class Main {
     }
 
     public static void secuencial(){
-        GeneradorCadena.generarCadenasIncremental(Constante.ALFABETO,11);
+        GeneradorCadena.generarCadenasIncremental(Constante.ALFABETO,4);
     }
     public static double nanoSegundoASegundo(Long tiempo){
         return tiempo *1.0 * Math.pow(10,-9);
