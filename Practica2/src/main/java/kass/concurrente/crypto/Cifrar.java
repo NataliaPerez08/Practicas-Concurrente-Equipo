@@ -88,7 +88,7 @@ public class Cifrar {
     public static boolean descifraC(String palabraCifrada, String contra) throws Exception {
         byte[] res = cifra(contra);
         String palabra = byteToString(res);
-        System.out.println("AQUI: " + palabra + " "+ palabraCifrada + " CONTRA: " + contra);//Descomentar en caso de querer hacer pruebas
+        //System.out.println("AQUI: " + palabra + " "+ palabraCifrada + " CONTRA: " + contra);//Descomentar en caso de querer hacer pruebas
         return byteToString(res).equals(palabraCifrada);
     }
 }
