@@ -16,7 +16,6 @@ public class Main {
         Long inicio = System.nanoTime();
         System.out.println("Inicio "+inicio);
         secuencial();
-        //System.out.println(Cifrar.descifraC(Constante.LLAVE, Constante.CONTRASENNA));
         Long fin = System.nanoTime();
         Long total = fin-inicio;
         System.out.println("TIEMPO TOTAL: " + nanoSegundoASegundo(total));
@@ -34,7 +33,7 @@ public class Main {
     }
 
     public static void secuencial(){
-        GeneradorCadena.generarCadenasIncremental(Constante.ALFABETO,4);
+        GeneradorCadena.generarCadenasIncremental(Constante.ALFABETO,6);
     }
     public static double nanoSegundoASegundo(Long tiempo){
         return tiempo *1.0 * Math.pow(10,-9);
