@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //calcular_combinaciones(Constante.ALFABETO.length());
         Long inicio = System.nanoTime();
-        System.out.println("Inicio"+inicio);
+        System.out.println("Inicio "+inicio);
         secuencial();
         //System.out.println(Cifrar.descifraC(Constante.LLAVE, Constante.CONTRASENNA));
         Long fin = System.nanoTime();

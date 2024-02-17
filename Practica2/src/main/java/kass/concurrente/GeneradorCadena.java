@@ -14,6 +14,7 @@ public class GeneradorCadena {
 
     private static void generarCadenasRecursivo(String alfabeto, int longitud, char[] cadenaActual, int posicion) {
         if (posicion == longitud) {
+            //System.out.println(cadenaActual);
             procesarCadena(cadenaActual);
             return;
         }
@@ -29,6 +30,9 @@ public class GeneradorCadena {
         try {
             if(Cifrar.descifraC(Constante.LLAVE, aux)){
                 System.out.println("La contrasenna es: " + aux);
+                Long tiempo_fin = System.nanoTime();
+                System.out.println("Tiempo final: " + tiempo_fin);
+                System.exit(0);
             }
         } catch (Exception e) {
             System.out.println("Error al descifrar la contrasenna: " + aux);

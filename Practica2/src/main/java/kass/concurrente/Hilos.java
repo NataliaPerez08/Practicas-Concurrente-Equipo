@@ -52,7 +52,8 @@ public class Hilos extends Thread{
     public static void main(String[] args) {
         Long tiempo_inicio = System.nanoTime();
         System.out.println("Inicio: "+nanoSegundoASegundo(tiempo_inicio));
-        int longitud = 11;
+        int longitud = 4;
+        System.out.println("Longitud: " + longitud);
         int hilos = Constante.HILOS;
 
         List<Hilos> listaHilos = new ArrayList<Hilos>();
