@@ -5,7 +5,9 @@ import java.util.List;
 
 import kass.concurrente.constants.Constante;
 import kass.concurrente.crypto.Cifrar;
-
+/**
+* Clase que genera y manipula las cadenas para obtener la contraseña.
+*/
 public class Cadenas extends Thread{
     private String alfabeto;
     private int longitud;
@@ -13,6 +15,14 @@ public class Cadenas extends Thread{
     private int[] indicesFin;
     private boolean bandera=true;
 
+    /**
+     * Constructor de la clase
+     * @param alfabeto conjunto de símbolos que generan a las cadenas
+     * @param longitud cantidad de símbolos en la cadena
+     * @param indicesFin lista con los índices de la primer cadena que se puede generar , donde cada índice  corresponde a la posición de cada símbolo dentro del alfabeto 
+     * @param indicesFin lista con los índices de la última cadena que se puede generar , donde cada índice  corresponde a la posición de cada símbolo dentro del alfabeto 
+     * 
+     */ 
     public Cadenas(String alfabeto, int longitud,int[] indicesIni,int[] indicesFin){
         this.alfabeto = alfabeto;
         this.longitud = longitud;
@@ -20,6 +30,11 @@ public class Cadenas extends Thread{
         this.indicesFin=indicesFin;
 
     }
+    
+    /**
+     * Método que realiza todas las operaciones necesarias que hace el hilo para tratar de encontrar
+     * la contraseña.
+     */
     public void run(){
         char[] cadenaActual = new char[longitud];
         
@@ -32,7 +47,16 @@ public class Cadenas extends Thread{
         }
     }
 
-   
+   /**
+     * Genera las cadenas de una longitud determinada de forma recursiva y las procesa para saber si alguna corresponde a la contraseña esperada.
+     * @param alfabeto conjunto de símbolos que generan a las cadenas
+     * @param longitud cantidad de símbolos en cada cadena.
+     * @param cadenaActual cadena sobre la que se hace la recursividad.
+     * @param posición índice de un símbolo en la cadena.
+     * @param indicesFin lista con los índices de la primer cadena que se puede generar , donde cada índice  corresponde a la posición de cada símbolo dentro del alfabeto 
+     * @param indicesFin lista con los índices de la última cadena que se puede generar , donde cada índice  corresponde a la posición de cada símbolo dentro del alfabeto 
+     * @return boolean True si se encuentra 
+     */
     private boolean generarCadenasRecursivo(String alfabeto, int longitud, char[] cadenaActual, int posicion,int[] indicesIni,int[] indicesFin) {
         if(bandera){
             if (posicion == longitud) {
@@ -67,6 +91,10 @@ public class Cadenas extends Thread{
         
         
     }
+    /**
+     * Procesa una cadena para tratar de encontrar la contraseña.
+     * @param cadena cadena que será ocupada para ver si es la contraseña que se busca.
+     */
     private void procesarCadena(char[] cadena) {
         String aux = new String(cadena);
         try {
@@ -81,10 +109,22 @@ public class Cadenas extends Thread{
         }
     }
 
+    /**
+    *Convierte de nanoSegundos a segundos
+    * @param tiempo cantidad de nanosegundos que serán convertidos a segundos.
+    * @return double tiempo resultante en segundos.
     public static double nanoSegundoASegundo(Long tiempo){
         return tiempo *1.0 * Math.pow(10,-9);
     }
 
+     /**
+     * Método que verifica si una cadena corresponde con la última cadena que puede generar, 
+     * de manera recursiva, un hilo.
+     * @param cadena cadena a analizar para saber si corresponde con el límite de cadenas que se pueden generar.
+     * @param indicesFin lista con los índices de última cadena que se puede generar , donde cada índice  corresponde a la posición de cada símbolo dentro del alfabeto 
+     * @param alfabeto símbolos permitidos para generar las cadenas.
+     * @return boolean True si los símbolos la cadena pasada corresonde con con los símbolos obtenidos de índicesFin. False en caso contrario.
+     */
     private boolean limite(char[] cadena, int[] indicesFin,String alf){
         
         for(int i= 0;i<cadena.length;i++){
