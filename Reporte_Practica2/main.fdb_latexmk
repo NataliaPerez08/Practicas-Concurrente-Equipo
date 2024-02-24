@@ -1,5 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1708750542 "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" "main.pdf" "main" 1708750544 0
+["pdflatex"] 1708812637 "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" "main.pdf" "main" 1708812639 0
+  "10minutos.png" 1708812348 382508 d673894f35f273bc3914ff38cb3f251c ""
   "C:/Users/nataa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1707505674 339932 be0f7d0842c1598c58300435aa008992 ""
   "C:/Users/nataa/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1684018210 23178960 a38ef67c15b9aff94219fc144358bd8c ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx10.tfm" 1136765053 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -42,10 +43,11 @@
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1665067579 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1665067579 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1680182075 29768 5600b3a98028e2e01b60e7f98fbf4b9c ""
-  "agreguePalabras.png" 1708749642 156003 32cd46ae5dd4d7689e7f56aff51d2480 ""
-  "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" 1708750542 7139 8b84480ef3c041c954aca3059c3c1a77 ""
-  "diagramaTiempoVSHilos.png" 1708737359 24750 e8457e992fe00ff4706b23f0c6888a17 ""
-  "main.aux" 1708750544 1697 bd719a7cedcc5a0a45c9fb92de06cdb5 "pdflatex"
+  "agreguePalabras.png" 1708810429 156003 32cd46ae5dd4d7689e7f56aff51d2480 ""
+  "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" 1708812636 7572 7cd9253e4ebfec1869a1a855b5889345 ""
+  "diagramaTiempoVSHilos.png" 1708810429 24750 e8457e992fe00ff4706b23f0c6888a17 ""
+  "errorPalabra.png" 1708812448 177422 96a56fc0149c410224f466d3b053b33a ""
+  "main.aux" 1708812639 2101 36ee081dd79ae0413614d29b12ff5f99 "pdflatex"
   (generated)
   "main.aux"
   "main.log"
