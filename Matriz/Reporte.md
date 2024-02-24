@@ -28,7 +28,7 @@
 | 100   | 100                  | 1.4                  | 100%                 |
 | 1000  | 1000                 | 0.215                | 100%                 |
 
-![Muestra los resultados obtenidos en la terminal al ejecutar el programa.](capturas/pruebas.png)
+![Muestra los resultados obtenidos en la terminal al ejecutar el programa.](captura.jpeg)
 
 #### Lo aprendido en el ejercicio
 - Que ejecutar un algoritmo que realiza una tarea en paralelo utilizando múltiples hilos de ejecución. Nos permite aprovechar los recursos del sistema de manera más efectiva y mejorar el rendimiento al distribuir la carga de trabajo.

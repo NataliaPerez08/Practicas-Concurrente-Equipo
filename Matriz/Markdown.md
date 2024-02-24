@@ -1,3 +1,7 @@
+# Equipo: Los hilos del barrio
+Jonathan Bautista Parra
+Natalia Abigail Pérez Romero
+Valeria Reyes Tapia
 ## Detalles del Programa de Multiplicación de Matrices Paralelas para nuestra Misión Secundaria
 
 Este programa en Java, `MatrizMultiplicacion`, se encarga de multiplicar dos matrices de tamaño fijo de manera paralela utilizando múltiples hilos. A continuación, se proporciona una descripción más detallada de su funcionamiento y cómo ejecutarlo:
