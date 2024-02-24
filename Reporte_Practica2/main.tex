@@ -1,36 +1,71 @@
 \documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
 
-\title{Title of the Article}
-\author{Author Name}
+\title{Cómputo Concurrente 2024-2 \\ Tarea 2 \\ Introducción al cómputo concurrente}
+
+\author{Natalia Abigail Pérez Romero\\
+Jonathan Bautista Parra \\ Valeria Reyes Tapia}
+
 \date{\today}
 
 \begin{document}
 
 \maketitle
 \section{Introduction}
-
+En esta práctica se implementó un programa en Java que simula un ataque de fuerza bruta para obtener una contraseña. El programa utilizará hilos para realizar el ataque de manera concurrente de forma que cada hilo se encarga de buscar una parte de las combinaciones posibles de la contraseña. También se calculará la aceleración teórica y obtenida en función del número de hilos y porcentaje de código en paralelo.
 
 \section{Graficas y tablas de valores}
 
-Nuestra contraseña tiene 6 caracteres, por lo que el número de combinaciones posibles es $26^6 = 308 915 776$. En la tabla \ref{tab:my_label} se muestra la aceleración teórica y obtenida en función del número de hilos y porcentaje de código en paralelo.
-En este caso, consideramos el porcentaje de código paralelizable como el $cociente=\frac{26^6}{hilos}*10$, dado que usamos este cociente para repartir el trabajo entre los hilos (las posibles combinaciones de las cadenas).
+Después de ejecutar la solución para 1, 2, 27 y 100 hilos, se obtuvieron los siguientes resultados:
+
+\begin{table}[h]
+    \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Número de hilos} & \textbf{Tiempo de ejecución (s)} \\
+            \hline
+            1 & 5.79159E+11\\
+            \hline  
+            2 &  7.2579E+11 \\
+            \hline
+            27 &  3.64659E+11\\
+            \hline
+            100 &  1.21143E+12\\
+            \hline
+        \end{tabular}
+    \caption{Tabla de tiempos de ejecución en función del número de hilos.}
+    \label{tab:tiempos-ejecucion}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{diagramaTiempoVSHilos.png}
+    \caption{Gráfica de tiempos de ejecución en función del número de hilos.}
+    \label{fig:tiempos-ejecucion}
+\end{figure}
+
+
+Nuestra contraseña tiene 6 caracteres, por lo que el número de combinaciones posibles es $26^6 = 308 915 776$. En la tabla \ref{tab:aceleracion-teorica-obtenida} se muestra la aceleración teórica y obtenida en función del número de hilos y porcentaje de código en paralelo.
+En este caso, consideramos el porcentaje de código paralelizable como el $100\%$, dado que los hilos no requieren de comunicación entre ellos para realizar su trabajo.
 
 \begin{table}[h]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Número de hilos} & \textbf{Aceleración teórica} & \textbf{Aceleración obtenida} & \textbf{\% código en paralelo} \\
+\textbf{Número de} & \textbf{Aceleración} & \textbf{Aceleración} & \textbf{\% código} \\
+\textbf{hilos} & \textbf{teórica} & \textbf{obtenida} & \textbf{en paralelo} \\
 \hline
-1 & - & - & 30.89 \% \\
-2 & - & - & 15.44 \% \\
-27 & - & - & 11.44 \% \\
-100 & - & - & 308915776\% \\
+1 & 1 & 5.79159E+11 & 100 \% \\
+2 & (5.79159E+11/2) = 2.8958E+11 & 7.2579E+11 & 100 \%  \\
+27 & (5.79159E+11/26) = 2.14133E+10 & 3.64659E+11 & 100 \%  \\
+100 & (5.79159E+11/100) = 2.14133E+10 & 1.21143E+12 & 100\% \\
 \hline
 \end{tabular}
 \caption{Tabla de aceleración teórica y obtenida en función del número de hilos y porcentaje de código en paralelo.}
-\label{tab:my_label}
+\label{tab:aceleracion-teorica-obtenida}
 \end{table}
-
+Si el tiempo de ejecución con un hilo es de 5.79159E+11, entonces la aceleración teorica con 2 hilos es de 2.89579E+11, con 27 hilos es de 2.14133E+10 y con 100 hilos es de 5.79159E+9.
 
 \section{Cuestionario}
 \begin{enumerate}
@@ -57,7 +92,7 @@ En este caso, consideramos el porcentaje de código paralelizable como el $cocie
     \item ¿Por qué crees a que se debe esto?
     
     Los sistemas no son perfectamente paralelos: La mayoría de los sistemas tienen algunos componentes que son secuenciales.
-    Los componentes no siempre se ejecutan al máximo rendimiento: Los componentes pueden estar inactivos o ejecutarse a una velocidad inferior a su máximo rendimiento por diversas razones, como la falta de recursos o la espera de la entrada del usuario.
+    Los componentes no siempre se ejecutan al máximo rendimiento: Los componentes pueden estar inactivos o ejecutarse a una velocidad inferior a su máximo rendimiento.
 
     \item ¿Cuál sería la mejora máxima? Es decir, la aceleración teórica máxima
     
@@ -77,11 +112,30 @@ En este caso, consideramos el porcentaje de código paralelizable como el $cocie
 
     \item Escribe tus conclusiones, además de lo que aprendiste en esta práctica, contratiempos y descubrimientos que hubo durante su realización.
     
+    En esta práctica aprendimos a utilizar hilos en Java y a calcular la aceleración teórica y obtenida en función del número de hilos y porcentaje de código en paralelo. Aprendimos que la ley de Amdahl no siempre se cumple en la práctica y que la mejora máxima o aceleración teórica máxima se alcanza cuando se utiliza un número infinito de procesadores. 
+
+    Durante la realización de la práctica, tuvimos problemas con la implementación de los hilos porque nuestro poder de computo es límitado, así que nuestra contraseña tuvo que ser de 6 caracteres, lo que limitó el número de combinaciones posibles.
+    
     \item ¿Cuál es su rol? 
     
+    Nuestro rol es el de los hilos, los cuales se les encarga el trabajo de obtener por fuerza bruta la contraseña para obtener un mensaje secreto. 
+
     \item ¿Cuál es mi rol?
+    
+    Tu rol es el del despachador, el cual se encarga de repartir el trabajo entre los hilos.
 
     
 \end{enumerate}
+
+\newpage
+\subsection{Una captura de pantalla cuando agregaste tus palabras.}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{agreguePalabras.png}
+    \caption{Captura de pantalla de cuando se agregaron las palabras.}
+    \label{fig:captura-pantalla}
+\end{figure}
+    
+\subsection{Una captura de pantalla 10 minutos antes de entregar la practica.}
 
 \end{document}
