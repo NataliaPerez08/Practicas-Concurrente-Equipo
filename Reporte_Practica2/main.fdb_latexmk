@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1708736183 "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" "main.pdf" "main" 1708736184 0
+["pdflatex"] 1708737847 "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" "main.pdf" "main" 1708737847 0
   "C:/Users/nataa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1707505674 339932 be0f7d0842c1598c58300435aa008992 ""
   "C:/Users/nataa/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1707362734 11548 f458eebf0af555d508803df809e821df ""
   "C:/Users/nataa/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1684018210 23178960 a38ef67c15b9aff94219fc144358bd8c ""
@@ -24,13 +24,14 @@
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 179c33bbf43f19adbb3825bb4e36e57a ""
+  "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1247596667 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/base/article.cls" 1669844196 20144 d5ecf0a5140c8d8d8b72cbe86e320eff ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/base/size10.clo" 1669844196 8448 c33a4e1cb35cee9b33c2b21033b73e39 ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1680182075 29768 5600b3a98028e2e01b60e7f98fbf4b9c ""
-  "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" 1708736182 4152 1c7d280128a8ee59ca66f4dd21d20b65 ""
-  "main.aux" 1708736184 700 7e2ba93363b370321369cc67037768b7 "pdflatex"
+  "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" 1708737846 4126 27dd028f6bf5db0ce2af3c9ae1490945 ""
+  "main.aux" 1708737847 593 4525535b6d3d1042321b0f831df025d0 "pdflatex"
   (generated)
   "main.aux"
   "main.log"

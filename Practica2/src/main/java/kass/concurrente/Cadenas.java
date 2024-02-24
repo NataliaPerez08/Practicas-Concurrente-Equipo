@@ -128,7 +128,7 @@ public class Cadenas extends Thread{
         System.out.println("Inicio: " + nanoSegundoASegundo(tiempoInicio));
         int longitud = 6;
         System.out.println("Longitud: " + longitud);
-        int hilos = 1;
+        int hilos = 100;
         System.out.println("Hilos: " + hilos);
 
         List<Cadenas> listaHilos = new ArrayList<>();
