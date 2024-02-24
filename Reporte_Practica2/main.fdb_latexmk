@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1708750492 "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" "main.pdf" "main" 1708750493 0
+["pdflatex"] 1708750542 "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" "main.pdf" "main" 1708750544 0
   "C:/Users/nataa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1707505674 339932 be0f7d0842c1598c58300435aa008992 ""
   "C:/Users/nataa/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1684018210 23178960 a38ef67c15b9aff94219fc144358bd8c ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx10.tfm" 1136765053 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -43,9 +43,9 @@
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/graphics/trig.sty" 1665067579 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Users/nataa/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1680182075 29768 5600b3a98028e2e01b60e7f98fbf4b9c ""
   "agreguePalabras.png" 1708749642 156003 32cd46ae5dd4d7689e7f56aff51d2480 ""
-  "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" 1708750490 7144 190bd4aba5a5fa87bbbc3665303ea376 ""
+  "c:/Users/nataa/Documents/Practicas-Concurrente-Equipo/Reporte_Practica2/main.tex" 1708750542 7139 8b84480ef3c041c954aca3059c3c1a77 ""
   "diagramaTiempoVSHilos.png" 1708737359 24750 e8457e992fe00ff4706b23f0c6888a17 ""
-  "main.aux" 1708750493 1697 bd719a7cedcc5a0a45c9fb92de06cdb5 "pdflatex"
+  "main.aux" 1708750544 1697 bd719a7cedcc5a0a45c9fb92de06cdb5 "pdflatex"
   (generated)
   "main.aux"
   "main.log"
