@@ -60,12 +60,7 @@ public class Cadenas extends Thread{
     private boolean generarCadenasRecursivo(String alfabeto, int longitud, char[] cadenaActual, int posicion,int[] indicesIni,int[] indicesFin) {
         if(bandera){
             if (posicion == longitud) {
-                
-    
-                //if(limite(cadenaActual, indicesFin, alfabeto)) return false;
-    
                 procesarCadena(cadenaActual);
-                //System.out.println("cadena: "+ Arrays.toString(cadenaActual));
                 return true;
             }
             int lim=alfabeto.length()-1;
@@ -75,14 +70,8 @@ public class Cadenas extends Thread{
                 if(limite(cadenaActual, indicesFin, alfabeto)){
                     bandera=false;
                     return false;
-                    
-    
                 } 
-                generarCadenasRecursivo(alfabeto, longitud, cadenaActual, posicion + 1,indicesIni,indicesFin);
-                
-               
-                   
-                
+                generarCadenasRecursivo(alfabeto, longitud, cadenaActual, posicion + 1,indicesIni,indicesFin);   
             }
            return false;
         }
@@ -113,6 +102,7 @@ public class Cadenas extends Thread{
     *Convierte de nanoSegundos a segundos
     * @param tiempo cantidad de nanosegundos que serán convertidos a segundos.
     * @return double tiempo resultante en segundos.
+    **/
     public static double nanoSegundoASegundo(Long tiempo){
         return tiempo *1.0 * Math.pow(10,-9);
     }
@@ -129,48 +119,36 @@ public class Cadenas extends Thread{
         
         for(int i= 0;i<cadena.length;i++){
             if(cadena[i]!=alf.charAt(indicesFin[i])) return false;
-            
-
         }
-        System.out.println("Si se cumplee/////////////////");
-
         return true;
     }
 
     public static void main(String[] args) {
-        Long tiempo_inicio = System.nanoTime();
-        System.out.println("Inicio: "+nanoSegundoASegundo(tiempo_inicio));
+        long tiempoInicio = System.nanoTime();
+        System.out.println("Inicio: " + nanoSegundoASegundo(tiempoInicio));
         int longitud = 6;
         System.out.println("Longitud: " + longitud);
-        int hilos = 10;
+        int hilos = 1;
+        System.out.println("Hilos: " + hilos);
 
-        List<Cadenas> listaHilos = new ArrayList<Cadenas>();
+        List<Cadenas> listaHilos = new ArrayList<>();
 
-        int lugares = 1;
-        
         String original = "abcdefghijklmnopqrstuvwxyz";
-        int lenAlf = original.length(); 
+        int lenAlf = original.length();
         int potencia = lenAlf;
-
-        
 
         while(hilos>potencia){
 
             potencia *=lenAlf;
-            lugares ++;
-
         }
        
-
         double cociente = Math.pow(lenAlf, longitud)/hilos;
-        System.out.println(cociente);
+        System.out.println("Cociente: " + cociente);
+        System.exit(0);
         double aux =0;
 
         int[] indicesIni = new int[longitud];
         int[] indicesFin = new int[longitud];
-        double aux2 =0;
-
-
 
         for(int j=0;j<hilos;j++){
             aux=(j)*cociente;
@@ -193,11 +171,9 @@ public class Cadenas extends Thread{
             h.start();
             listaHilos.add(h);
             System.out.println("indicesIni del hilo "+1+": "+Arrays.toString(indicesIni)+ ", indicesFin del hilo "+1+": "+Arrays.toString(indicesFin));
-    
-    
+
             
         }
-
 
        
         for(Cadenas hilo: listaHilos){
@@ -205,14 +181,11 @@ public class Cadenas extends Thread{
                 hilo.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
         Long tiempo_fin = System.nanoTime();
         System.out.println("Tiempo final: " + nanoSegundoASegundo(tiempo_fin));
-
-        //Long tiempo_total = tiempo_fin - tiempo_inicio;
-        //System.out.println("Tiempo total: " + nanoSegundoASegundo(tiempo_total));
-
         
     }
 }

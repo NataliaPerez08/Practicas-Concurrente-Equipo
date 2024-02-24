@@ -1,7 +1,5 @@
 package kass.concurrente;
 
-import java.util.ArrayList;
-import java.util.List;
 import kass.concurrente.constants.Constante;
 import kass.concurrente.crypto.Cifrar;
 
@@ -14,7 +12,6 @@ public class GeneradorCadena {
 
     private static void generarCadenasRecursivo(String alfabeto, int longitud, char[] cadenaActual, int posicion) {
         if (posicion == longitud) {
-            //System.out.println(cadenaActual);
             procesarCadena(cadenaActual);
             return;
         }
