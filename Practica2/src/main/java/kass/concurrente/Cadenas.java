@@ -128,7 +128,7 @@ public class Cadenas extends Thread{
         System.out.println("Inicio: " + nanoSegundoASegundo(tiempoInicio));
         int longitud = 6;
         System.out.println("Longitud: " + longitud);
-        int hilos = 100;
+        int hilos = 27;
         System.out.println("Hilos: " + hilos);
 
         List<Cadenas> listaHilos = new ArrayList<>();
@@ -143,8 +143,8 @@ public class Cadenas extends Thread{
         }
        
         double cociente = Math.pow(lenAlf, longitud)/hilos;
-        System.out.println("Cociente: " + cociente);
-        System.exit(0);
+        //System.out.println("Cociente: " + cociente);
+
         double aux =0;
 
         int[] indicesIni = new int[longitud];
@@ -170,7 +170,7 @@ public class Cadenas extends Thread{
             Cadenas h = new Cadenas(original, longitud,indicesIni,indicesFin);
             h.start();
             listaHilos.add(h);
-            System.out.println("indicesIni del hilo "+1+": "+Arrays.toString(indicesIni)+ ", indicesFin del hilo "+1+": "+Arrays.toString(indicesFin));
+            //System.out.println("indicesIni del hilo "+1+": "+Arrays.toString(indicesIni)+ ", indicesFin del hilo "+1+": "+Arrays.toString(indicesFin));
 
             
         }
