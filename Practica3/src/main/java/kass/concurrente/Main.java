@@ -39,10 +39,8 @@ public class Main implements Runnable {
 
 
     public static void main(String[] args) {
-        Main m = new Main();
 
-        final Logger LOG = Logger.getLogger("paquete.NombreClase"); // EJEMPLO LOGGER
-
-        if(LOGS) LOG.info("HOLA SOY UN MENSAJE");
+        final Logger log = Logger.getLogger("paquete.NombreClase, Inicia simulación"); // EJEMPLO LOGGER
+        if(Boolean.TRUE.equals(LOGS)) log.info("HOLA SOY UN MENSAJE");
     }
 }

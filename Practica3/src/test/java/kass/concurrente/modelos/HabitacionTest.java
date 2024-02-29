@@ -3,6 +3,7 @@ package kass.concurrente.modelos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,28 +22,29 @@ class HabitacionTest {
     }
 
     @Test
-    void switchTest1(){
+    void switchTest1() throws InterruptedException{
         h.entraHabitacion(p);
         assertTrue(h.getPrendido());
     }
 
     @Test
-    void switchTest2(){
+    void switchTest2() throws InterruptedException{
         h.setPrendido(true);
         h.entraHabitacion(v);
         assertFalse(h.getPrendido());
     }
 
     @Test
-    void marcado(){
+    void marcado() throws InterruptedException{
         h.entraHabitacion(p);
         assertTrue(p.getMarcado());
     }
 
     @Test
-    void simSimple(){
+    void simSimple() throws InterruptedException{
         h.entraHabitacion(p);
         h.entraHabitacion(v);
-        assertTrue(v.getContador() == 1);
+    ///assertTrue(v.getContador() == 1);
+        assertEquals(1, ((Vocero) v).getContador());
     }
 }

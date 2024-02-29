@@ -12,6 +12,17 @@ public class Vocero extends Prisionero{
         super(id, esVocero, marcado);
         //Completar y hacer documentacion
     }
-    
     //Mismo caso que el otro, annadir getter and setter
+    public Integer getContador() {
+        return contador;
+    }
+    
+    public void setContador(Integer contador) {
+        this.contador = contador;
+    }
+    @Override
+    public String toString(){
+        return "Vocero: " + id + " " + esVocero + " " + marcado + " " + contador;
+    }
 }
+
