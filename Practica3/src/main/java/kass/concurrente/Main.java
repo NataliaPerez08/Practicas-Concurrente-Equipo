@@ -15,7 +15,7 @@ import static kass.concurrente.constantes.Contante.LOGS;
 /**
  * Clase principal, se ejecuta todo la simulacion
  * Como en el cuento.
- * @author <Equipo>
+ * @author Los hilos del barrio
  * @version 1.0
  */
 public class Main implements Runnable {
@@ -34,9 +34,6 @@ public class Main implements Runnable {
             prisioneros[i] = new Prisionero(i, false, false);
 
         }
-
-
-        //Agregar lo que haga falta para que funcione
     }
 
     /*
@@ -44,7 +41,7 @@ public class Main implements Runnable {
      * 1.- Ya genere el lock, es un reentrantLock, investiguen que hace
      * 2.- Tenenemos que tener un lugar el donde se albergaran los prisioneros
      * 3.- Tenemos que tener un lugar donde se albergan los Hilos
-     * 4.- Se nececita un objeto de tipo Habitacion para que sea visitada
+     * 4.- Se necesita un objeto de tipo Habitacion para que sea visitada
      * 5.- Aqui controlaremos el acceso a la habitacion, aunque por defecto tenia exclusion mutua
      * aqui hay que especificar el como se controlara
      * 6.- Hay que estar ITERANDO constantemente para que todos los prisiones puedan ir ingresando
@@ -53,7 +50,6 @@ public class Main implements Runnable {
     public void run() {
 
         Prisionero prisionero = prisioneros[Integer.valueOf(Thread.currentThread().getName())];
-        boolean bandera = true;
         System.out.println("pasa el prisionero "+prisionero.getId());
         while(!salir){
             lock.lock();
@@ -61,7 +57,6 @@ public class Main implements Runnable {
                 habitacion.entraHabitacion(prisionero);
                 if(prisionero.getEsVocero()){
                     salir=!habitacion.entraHabitacion(prisionero);
-
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -69,10 +64,6 @@ public class Main implements Runnable {
                 lock.unlock();
             }
         }
-        
-
-
-        
     }
 
 
@@ -89,7 +80,6 @@ public class Main implements Runnable {
             t.join();
         }
        
-
         final Logger LOG = Logger.getLogger("paquete.NombreClase"); // EJEMPLO LOGGER
 
         if(LOGS) LOG.info("Ya salimos xd");

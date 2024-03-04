@@ -3,7 +3,7 @@ package kass.concurrente.modelos;
 /**
  * Clase que modela un prisioner
  * @version 1.0
- * @author <Su equipo>
+ * @author Los hilos del barrio
  */
 public class Prisionero {
     protected Integer id;
@@ -22,8 +22,6 @@ public class Prisionero {
         this.esVocero=esVocero;
         this.marcado=marcado;
     }
-
-    //Annadir getter and setter, toString.
 
     public Boolean getEsVocero() {
         return esVocero;
@@ -60,12 +58,7 @@ public class Prisionero {
         this.vecesPasadas++;
     }
 
-    public void aumentarContador(){
-
-    }
-
     public int getContador(){
         return 0;
-        
     }
 }

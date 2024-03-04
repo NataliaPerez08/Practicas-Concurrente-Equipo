@@ -8,7 +8,7 @@ import java.util.Random;
  * si el foco esta prendido o no
  * Se desconoce el estado inicial del foco (Usar un random, para que sea
  * pseudoaleatorio el estado inicial)
- * @author <Equipo>
+ * @author Los hilos del barrio
  * @version 1.0
  */
 public class Habitacion {
@@ -45,7 +45,6 @@ public class Habitacion {
      * @throws InterruptedException Si falla algun hilo
      */
     public Boolean entraHabitacion(Prisionero prisionero) throws InterruptedException{
-        int contador=0;
         if(!prendido && prisionero.getVecesPasadas()<2 && !prisionero.getEsVocero()){
             System.out.println("PRISIONERO "+prisionero.getId()+" ENTRANDO");
             prendido=true;
@@ -54,15 +53,13 @@ public class Habitacion {
             prisionero.setMarcado(true);
             
 
-        }if(prendido && prisionero.getEsVocero()){
+        }
+        if(prendido && prisionero.getEsVocero()){
             System.out.println("VOCERO ENTRANDO");
 
             prendido=false;
             ((Vocero) prisionero).aumentarContador();
             voceroYaPuedeHablar= !(((Vocero) prisionero).getContador()>=(2*(Contante.PRISIONEROS-1)));       
-
-
-            
         }
         return  voceroYaPuedeHablar;
     }
