@@ -1,52 +1,54 @@
 package kass.concurrente.tenedor;
 
+import kass.concurrente.candadosImpl.PetersonLock;
+
 /**
  * Clase que implementa el tenedor
  * Tenemos una variable entera que cuenta el numero de veces que fue tomado
  * Tiene una variable que simboliza su id
  * @version 1.1
- * @author <Su equipo>
+ * @author Los hilos del barrio
  */
 public class TenedorImpl implements Tenedor {
+    private int id;
+    private int vecesTomado;
+    private PetersonLock candado = new PetersonLock();
 
     public TenedorImpl(int id){
-
+        this.id = id;
+        this.vecesTomado = 0;
     }
 
     @Override
     public void tomar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tomar'");
+        System.out.println("Tenedor "+this.id+" tomado");
+        this.vecesTomado++;
+        candado.lock();
     }
 
     @Override
     public void soltar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'soltar'");
+        candado.unlock();
     }
 
     @Override
     public int getId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getId'");
+        return this.id;
     }
 
     @Override
     public int getVecesTomado() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'vecesTomado'");
+        return this.vecesTomado;
     }
 
     @Override
     public void setId(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setId'");
+        this.id = id;
     }
 
     @Override
     public void setVecesTomado(int vecesTomado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setVecesTomado'");
+        this.vecesTomado = vecesTomado;
     }
     
 }

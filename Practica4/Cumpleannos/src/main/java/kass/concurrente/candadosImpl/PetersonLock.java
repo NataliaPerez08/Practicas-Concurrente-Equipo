@@ -10,17 +10,25 @@ import kass.concurrente.candados.Lock;
  * @author Kassandra Mirael
  */
 public class PetersonLock implements Lock {
-
+    // thread-local index, 0 or 1
+    private volatile boolean[] flag = new boolean[2];
+    private volatile int victim;
+    
     @Override
     public void lock() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'lock'");
+        System.out.println("Locking. Hilo: "+Thread.currentThread().getName());
+        int i = Integer.parseInt(Thread.currentThread().getName());
+        int j = 1 - i;
+        flag[i] = true;
+        victim = i;
+        while (flag[j] && victim == i) {
+            // wait
+        }
     }
 
     @Override
     public void unlock() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'unlock'");
+        int i = Integer.parseInt(Thread.currentThread().getName());
+        flag[i] = false;
     }
-    
 }

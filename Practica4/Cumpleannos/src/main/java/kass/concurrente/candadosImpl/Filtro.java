@@ -11,34 +11,49 @@ import kass.concurrente.candados.Semaphore;
  * @author Kassandra Mirael
  */
 public class Filtro implements Semaphore {
-
+    int [] level;
+    int [] victim;
+    int maxHilosConcurrentes;
     /**
      * Constructor del Filtro
      * @param hilos El numero de Hilos Permitidos
      * @param maxHilosConcurrentes EL numero de hilos concurrentes simultaneos
      */
     public Filtro(int hilos, int maxHilosConcurrentes) {
-        /**
-         * AQUI VA TU CODIGO
-         */
+        this.maxHilosConcurrentes = maxHilosConcurrentes;
+        level = new int[hilos];
+        victim = new int[hilos];
+        for(int i = 0; i < hilos; ++i){
+            level[i] = 0;
+        }
     }
 
     @Override
     public int getPermitsOnCriticalSection() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPermitsOnCriticalSection'");
+        return maxHilosConcurrentes;
     }
 
     @Override
     public void acquire() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'acquire'");
+        int i = Integer.parseInt(Thread.currentThread().getName());
+        for(int j = 1; j < level.length; ++j){
+            level[i] = j;
+            victim[j] = i;
+            /* Aquí tenemos que modificar para permitir un cantidad m
+             * de hilos simultaneos en la seccion critica
+             */
+            for(int k = 0; k < level.length; ++k){
+                while((k != i) && (level[k] >= j) && (victim[j] == i)){
+                    //Espera
+                }
+            }
+        }   
     }
 
     @Override
     public void release() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'release'");
+        int i = Integer.parseInt(Thread.currentThread().getName());
+        level[i] = 0;
     }
     
 }
