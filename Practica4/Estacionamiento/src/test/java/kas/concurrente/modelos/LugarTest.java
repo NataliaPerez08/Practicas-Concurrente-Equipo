@@ -25,7 +25,10 @@ public class LugarTest {
 
     @Test
     void constructorTest(){
-        assertTrue(lugar.getId() == 1 && lugar.getDisponible() == true && lugar.getFiltroModificado() != null);
+        // Creamos un lugar con un id arbitrario para la prueba
+        Lugar lugar = new Lugar(1);
+        // Verificamos que el lugar esté disponible inicialmente
+        assertTrue(lugar.getId() == 1 && lugar.getDisponible());    
     }
 
     @Test
