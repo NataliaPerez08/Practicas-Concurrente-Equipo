@@ -15,9 +15,10 @@ public class EstacionamientoTest {
 
     @BeforeEach
     void setUp(){
-        es = new Estacionamiento(NUMLUGARES);
+        es = new Estacionamiento(NUMLUGARES, 1); // Pasamos 1 como número de pisos para la prueba
         initHilos();
     }
+
 
     /**
      * Teste que revisa si tiene todos los lugares disponibles al iniciar
@@ -34,7 +35,7 @@ public class EstacionamientoTest {
     @Test
     void conteoVecesEstacionado() throws InterruptedException{
         for(int i = 0; i < NUMLUGARES; i++){
-            es.getLugares()[i].estaciona();
+            es.entraCarro(i); // Simulamos la entrada de un carro
         }
         assertEquals(NUMLUGARES, verificaVecesEstacionado());
     }
@@ -52,12 +53,13 @@ public class EstacionamientoTest {
         assertEquals(NUMLUGARES*2,verificaVecesEstacionado());
     }
 
-    int verificaVecesEstacionado(){
+    public int verificaVecesEstacionado() {
         int res = 0;
-        for(int i = 0; i < es.getLugares().length; ++i){
-            res += es.getLugares()[i].getVecesEstacionado();
+        for (int i = 0; i < es.getLugares().length; ++i) {
+            for (int j = 0; j < es.getLugares()[0].length; j++) {
+                res += es.getLugares()[i][j].getVecesEstacionado();
+            }
         }
-
         return res;
     }
 
