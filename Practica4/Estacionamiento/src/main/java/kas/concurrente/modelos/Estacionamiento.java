@@ -7,77 +7,75 @@ package kas.concurrente.modelos;
  * @author Kassandra Mirael
  * @version 1.0
  */
-public class Estacionamiento {
+import java.util.concurrent.Semaphore;
 
-    /**
-     * Metodo constructor
-     * Modifica el constructor o crea otro segun consideres necesario
-     * @param capacidad La capacidad del estacionamiento
-     */
-    public Estacionamiento(int capacidad){
-        /**
-         * Aqui va tu codigo
-         */
+public class Estacionamiento {
+    private Lugar[][] lugares;
+    private int lugaresDisponibles;
+    private Semaphore mutex;
+    private Semaphore disponible;
+
+    public Estacionamiento(int capacidad, int pisos) {
+        lugares = new Lugar[pisos][capacidad / pisos];
+        lugaresDisponibles = capacidad;
+        mutex = new Semaphore(1);
+        disponible = new Semaphore(capacidad);
+        inicializaLugares();
+    }
+
+    public Lugar[][] getLugares() {
+        return this.lugares;
     }
 
     public int getLugaresDisponibles() {
-        return -1;
+        try {
+            mutex.acquire();
+            int disponibles = lugaresDisponibles;
+            mutex.release();
+            return disponibles;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return -1;
+        }
     }
 
-    public void setLugaresDisponibles(int lugaresDisponibles) {
+    public boolean estaLleno() {
+        try {
+            mutex.acquire();
+            boolean lleno = lugaresDisponibles == 0;
+            mutex.release();
+            return lleno;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return true;
+        }
     }
 
-    /**
-     * Metodo que nos indica si esta lleno el estacionamiento
-     * @return true si esta lleno, false en otro caso
-     */
-    public boolean estaLleno(){
-        return false;//Le mueven, es pa que compile
+    public void inicializaLugares() {
+        for (int i = 0; i < lugares.length; i++) {
+            for (int j = 0; j < lugares[i].length; j++) {
+                lugares[i][j] = new Lugar(i * lugares[i].length + j);
+            }
+        }
     }
 
-    /**
-     * Metodo que inicaliza los lugares del arreglo
-     * Este es un método optativo
-     */
-    public void inicializaLugares(){
-        /**
-         * Aqui va tu codigo
-         */
+    public void entraCarro(int nombre) throws InterruptedException {
+        disponible.acquire();
+        int lugar = obtenLugar();
+        asignaLugar(lugar);
+        System.out.println("El carro " + nombre + " ha entrado al estacionamiento.");
+        disponible.release();
     }
 
-    /**
-     * Metodo en el que se simula la entrada de un carro
-     * Imprime un texto que dice que el carro a entrado de color AZUL
-     * @param nombre El nombre del carro
-     * @throws InterruptedException Si llega a fallar
-     */
-    public void entraCarro(int nombre) throws InterruptedException{
-        /**
-         * Aqui va tu codigo
-         */
-    }
-
-    /**
-     * Metodo que asigna el lugar, una vez asignado ESTACIONA su nave
-     * @param lugar El lugar que correspone
-     * @throws InterruptedException
-     */
     public void asignaLugar(int lugar) throws InterruptedException {
-        /**
-         * Aqui va tucodigo
-         */
+        int piso = lugar / lugares[0].length;
+        int espacio = lugar % lugares[0].length;
+        lugares[piso][espacio].estaciona();
     }
 
-    /**
-     * Se obtiene un lugar de forma pseudoAleatoria
-     * Aqui necesito que revisen el repaso de estadistica que mande en 
-     * repaso, quiero que expliquen porque lo pedimos en forma pseudoAleatoria
-     * @return Retorna el indice del lugar
-     */
-    public int obtenLugar(){
-        /**
-         * Aqui va tu codigo
-         */
-        return -1;
+    public int obtenLugar() {
+        int randomPiso = (int) (Math.random() * lugares.length);
+        int randomEspacio = (int) (Math.random() * lugares[0].length);
+        return randomPiso * lugares[0].length + randomEspacio;
     }
 }
