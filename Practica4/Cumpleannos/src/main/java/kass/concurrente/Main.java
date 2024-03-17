@@ -1,5 +1,6 @@
 package kass.concurrente;
 import kass.concurrente.tenedor.TenedorImpl;
+import kass.concurrente.invitados.Inversionista;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,8 +9,10 @@ public class Main {
         System.out.println("Prueba tenedorImpl");
         TenedorImpl tenedor = new TenedorImpl(1);
         tenedor.tomar();
-        System.out.println("Tenedor tomado: "+tenedor.getVecesTomado());
         tenedor.soltar();
-        System.out.println("Tenedor soltado: "+tenedor.getVecesTomado());
+        Inversionista[] inversionistas = new Inversionista[4];
+        
+
+        
     }
 }

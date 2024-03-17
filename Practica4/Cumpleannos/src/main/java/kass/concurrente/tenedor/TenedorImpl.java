@@ -12,7 +12,6 @@ import kass.concurrente.candadosImpl.PetersonLock;
 public class TenedorImpl implements Tenedor {
     private int id;
     private int vecesTomado;
-    private PetersonLock candado = new PetersonLock();
 
     public TenedorImpl(int id){
         this.id = id;
@@ -23,12 +22,11 @@ public class TenedorImpl implements Tenedor {
     public void tomar() {
         System.out.println("Tenedor "+this.id+" tomado");
         this.vecesTomado++;
-        candado.lock();
     }
 
     @Override
     public void soltar() {
-        candado.unlock();
+        System.out.println("Tenedor "+this.id+" soltado");
     }
 
     @Override

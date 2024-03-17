@@ -1,6 +1,8 @@
 package kass.concurrente.invitados;
 
 import kass.concurrente.tenedor.Tenedor;
+import kass.concurrente.candadosImpl.PetersonLock;
+
 
 /**
  * Clase abstracta que modela al inversionista.
@@ -11,6 +13,12 @@ import kass.concurrente.tenedor.Tenedor;
  * @author Kassandra Mirael
  */
 public abstract class Inversionista implements Runnable {
+    Tenedor tenedorL;
+    Tenedor tenedorR;
+    int id;
+    int vecesComido=0;
+    PetersonLock candado = new PetersonLock();
+    
 
     @Override
     public void run() {
@@ -18,6 +26,15 @@ public abstract class Inversionista implements Runnable {
          * El inversionista debe pensar y entrar a la mesa un periodo de veces
          * puesto en el test, agrega el valor aqui.
          */
+        for(int i=0;i<10;i++){
+            try {
+                piensa();
+                entraALaMesa();
+                
+            } catch (InterruptedException e) {
+            }
+            
+        }
     }
 
     /**
@@ -33,6 +50,11 @@ public abstract class Inversionista implements Runnable {
         /**
          * Aqui va tu codigo
          */
+        tomaTenedores();
+        candado.lock();
+        come();
+        candado.unlock();
+        sueltaTenedores();
     }
 
     /**
@@ -47,6 +69,9 @@ public abstract class Inversionista implements Runnable {
         /**
          * Aqui va tu codigo
          */
+        System.out.println("Inversionista "+this.id+" comiendo :p");
+        Thread.sleep(generaTiempoDeEspera());
+        vecesComido++;
     }
 
     /**
@@ -59,6 +84,8 @@ public abstract class Inversionista implements Runnable {
         /**
          * Aqui va tu codigo
          */
+        System.out.println("Inversionista "+this.id+" pensando...");
+        Thread.sleep(this.generaTiempoDeEspera());
     }
 
     /**
@@ -90,34 +117,38 @@ public abstract class Inversionista implements Runnable {
      * Cuando acabes borra estew comentario
      */
     public int getId(){
-        return 0;
+        return id;
     }
 
     public void setId(int id){
+        this.id=id;
 
     }
 
     public Tenedor getTenedorIzq(){
-        return null;
+        return tenedorL;
     }
 
     public void setTenedorIzq(Tenedor t){
+        tenedorL = t;
 
     }
 
     public Tenedor getTenedorDer(){
-        return null;
+        return tenedorR;
     }
 
     public void setTenedorDer(Tenedor t){
+        tenedorR=t;
 
     }
 
     public int getVecesComido(){
-        return 0;
+        return vecesComido;
     }
 
     public void setVecesComido(int vecesComido){
+        this.vecesComido=vecesComido;
         
     }
 }

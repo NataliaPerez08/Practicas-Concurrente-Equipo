@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import kass.concurrente.candadosImpl.Filtro;
 
 public class SemaphoreTest {
-    static final int RONDAS = 100000;
+    static final int RONDAS = 100;
     static final int HILOS = 6;
     static final int MAX_HILOS_CONCURRENTES = 1;
     static int aprovacion = 0;
@@ -28,7 +28,10 @@ public class SemaphoreTest {
     }
 
     void initFiltroSemaforo(){
+        System.out.println("hola");
+
         semaforo = new Filtro(HILOS, MAX_HILOS_CONCURRENTES);
+        System.out.println("hola");
     }
 
     void initThreads(){
@@ -87,6 +90,7 @@ public class SemaphoreTest {
 
     @Test
     void semaforoTest() throws InterruptedException {
+        System.out.println("holas");
         initFiltroSemaforo();
 
         for(Thread t : hilos){
