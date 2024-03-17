@@ -78,11 +78,10 @@ public class prueba implements Semaphore {
     }
 
     public static void main(String[] args) {
-        prueba p = new prueba(4,1);
-        p.adquirir(0);
-        p.adquirir(1);
-        p.adquirir(2);
-        p.adquirir(3);
+        int hola =0;
+        int hola2 =0;
+       if(1 == ++hola) System.out.println("uno");
+       if(1 == hola2++) System.out.println("dos");
     }
     
 }

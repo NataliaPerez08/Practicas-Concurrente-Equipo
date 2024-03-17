@@ -14,7 +14,6 @@ public class Filtro implements Semaphore {
     int [] level;
     int [] victim;
     int maxHilosConcurrentes;
-    int numActualHilosConcurrentes=0; 
     /**
      * Constructor del Filtro
      * @param hilos El numero de Hilos Permitidos
@@ -38,6 +37,7 @@ public class Filtro implements Semaphore {
     public void acquire() {
         System.out.println("aquerido xd");
         int i = Integer.parseInt(Thread.currentThread().getName());
+        boolean existe_conflicto = true;
         for(int j = 1; j < level.length; ++j){
             level[i] = j;
             victim[j] = i;
@@ -46,8 +46,7 @@ public class Filtro implements Semaphore {
              */
             
             for(int k = 0; k < level.length; ++k){
-               if((k != i) && (level[k] >= j) && (victim[j] == i)) numActualHilosConcurrentes++;
-                while( numActualHilosConcurrentes == maxHilosConcurrentes){
+                while( existeConflicto(i,j) ){
                     //Espera
                 }
 
@@ -56,11 +55,21 @@ public class Filtro implements Semaphore {
         }   
     }
 
+    public boolean existeConflicto(int i, int j){
+        int numActualHilosConcurrentes = 0;
+        for(int k = 0; k < level.length; ++k){
+            if((k != i) && (level[k] >= j) && (victim[j] == i)) numActualHilosConcurrentes++;
+            if(numActualHilosConcurrentes==maxHilosConcurrentes) return true;
+        }
+        return false;
+
+    }
+
     @Override
     public void release() {
         int i = Integer.parseInt(Thread.currentThread().getName());
         level[i] = 0;
-        numActualHilosConcurrentes--;
+       
         
     }
     

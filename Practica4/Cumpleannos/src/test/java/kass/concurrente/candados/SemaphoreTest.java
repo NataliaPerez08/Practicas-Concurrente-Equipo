@@ -90,7 +90,6 @@ public class SemaphoreTest {
 
     @Test
     void semaforoTest() throws InterruptedException {
-        System.out.println("holas");
         initFiltroSemaforo();
 
         for(Thread t : hilos){
