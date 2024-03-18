@@ -1,6 +1,7 @@
 package kass.concurrente.invitados;
 
 import kass.concurrente.tenedor.Tenedor;
+import kass.concurrente.candadosImpl.Filtro;
 import kass.concurrente.candadosImpl.PetersonLock;
 
 
@@ -17,7 +18,12 @@ public abstract class Inversionista implements Runnable {
     Tenedor tenedorR;
     int id;
     int vecesComido=0;
-    PetersonLock candado = new PetersonLock();
+
+    /*Inversionista(int id,Tenedor l, Tenedor r){
+        this.id = id;
+        tenedorL = l;
+        tenedorR = r;
+    }*/
     
 
     @Override
@@ -26,10 +32,12 @@ public abstract class Inversionista implements Runnable {
          * El inversionista debe pensar y entrar a la mesa un periodo de veces
          * puesto en el test, agrega el valor aqui.
          */
-        for(int i=0;i<10;i++){
+        for(int i=0;i<500;i++){
             try {
                 piensa();
+
                 entraALaMesa();
+                //System.out.println("Inversionista "+id+" ingresando por "+i+" vez.");
                 
             } catch (InterruptedException e) {
             }
@@ -51,9 +59,7 @@ public abstract class Inversionista implements Runnable {
          * Aqui va tu codigo
          */
         tomaTenedores();
-        candado.lock();
         come();
-        candado.unlock();
         sueltaTenedores();
     }
 
@@ -69,9 +75,10 @@ public abstract class Inversionista implements Runnable {
         /**
          * Aqui va tu codigo
          */
-        System.out.println("Inversionista "+this.id+" comiendo :p");
+        ++vecesComido;
+        //System.out.println("Inversionista "+this.id+" comiendo :p");
         Thread.sleep(generaTiempoDeEspera());
-        vecesComido++;
+        
     }
 
     /**
@@ -84,7 +91,7 @@ public abstract class Inversionista implements Runnable {
         /**
          * Aqui va tu codigo
          */
-        System.out.println("Inversionista "+this.id+" pensando...");
+        //System.out.println("Inversionista "+this.id+" pensando...");
         Thread.sleep(this.generaTiempoDeEspera());
     }
 

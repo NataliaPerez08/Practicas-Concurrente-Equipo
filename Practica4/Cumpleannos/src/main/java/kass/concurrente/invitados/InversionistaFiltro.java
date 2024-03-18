@@ -1,7 +1,8 @@
 package kass.concurrente.invitados;
 
-import kass.concurrente.candadosImpl.Filtro;
+import kass.concurrente.candados.*;
 
+import kass.concurrente.tenedor.Tenedor;
 /**
  * Clase que modela al inversionista, pero esta vez
  * usando el filtro.
@@ -12,15 +13,25 @@ import kass.concurrente.candadosImpl.Filtro;
  * @author Kassandra Mirael
  */
 public class InversionistaFiltro extends Inversionista {
-    Filtro sem =new Filtro(4, 1);
+    Semaphore filtro;  
 
+    /*public InversionistaFiltro(int id, Tenedor l, Tenedor r,Semaphore filtro){
+        super(id,l,r);
+       this.filtro =filtro;
 
+    }*/
+    public InversionistaFiltro(Semaphore filtro){
+        this.filtro = filtro;
+    }
 
     @Override
     public void entraALaMesa() throws InterruptedException {
+        
         tomaTenedores();
+        filtro.acquire();
         come();
         sueltaTenedores();
+        filtro.release();
 
     }
 
@@ -29,7 +40,7 @@ public class InversionistaFiltro extends Inversionista {
 
         tenedorL.tomar();
         tenedorR.tomar();
-        sem.acquire();
+       
 
         /**
          * Aqui va tu codigo
@@ -41,7 +52,6 @@ public class InversionistaFiltro extends Inversionista {
 
         tenedorL.soltar();
         tenedorR.soltar();
-        sem.release();
         /**
          * Aqui va tu codigo
          */
