@@ -14,7 +14,6 @@ public class Filtro implements Semaphore {
     int [] level;
     int [] victim;
     int maxHilosConcurrentes;
-    volatile int numActualHilosConcurrentes;
     /**
      * Constructor del Filtro
      * @param hilos El numero de Hilos Permitidos
@@ -55,10 +54,15 @@ public class Filtro implements Semaphore {
     }
 
     public boolean existeConflicto(int i, int j){
-        numActualHilosConcurrentes = 0;
+        int numActualHilosConcurrentes = 0;
         for(int k = 0; k < level.length; ++k){
             if((k != i) && (level[k] >= j) && (victim[j] == i)) ++numActualHilosConcurrentes;
-            if(numActualHilosConcurrentes==maxHilosConcurrentes) return true;
+            if(numActualHilosConcurrentes==maxHilosConcurrentes){
+                System.out.print("");
+                return true;
+                
+
+            } 
         }
         return false;
 

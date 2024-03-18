@@ -18,6 +18,7 @@ public abstract class Inversionista implements Runnable {
     Tenedor tenedorR;
     int id;
     int vecesComido=0;
+    PetersonLock candado = new PetersonLock();
 
     /*Inversionista(int id,Tenedor l, Tenedor r){
         this.id = id;
@@ -75,9 +76,10 @@ public abstract class Inversionista implements Runnable {
         /**
          * Aqui va tu codigo
          */
-        ++vecesComido;
+        
         //System.out.println("Inversionista "+this.id+" comiendo :p");
-        Thread.sleep(generaTiempoDeEspera());
+        Thread.sleep(5);
+        vecesComido+=1;
         
     }
 
