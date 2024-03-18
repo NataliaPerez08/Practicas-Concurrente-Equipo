@@ -33,11 +33,7 @@ public class InversionistaFiltro extends Inversionista {
         
         filtro.acquire();
         tenedorL.tomar();
-        tenedorR.tomar();
-
-        /**
-         * Aqui va tu codigo
-         */
+        tenedorR.tomar()
     }
 
     @Override
@@ -45,11 +41,7 @@ public class InversionistaFiltro extends Inversionista {
         filtro.release();
         tenedorL.soltar();
         tenedorR.soltar();
-        
 
-        /**
-         * Aqui va tu codigo
-         */
     }
     
 }

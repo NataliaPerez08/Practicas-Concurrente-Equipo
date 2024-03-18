@@ -29,6 +29,7 @@ public class PetersonLock implements Lock {
 
     @Override
     public void unlock() {
+        System.out.println("Unlocking. Hilo: "+Thread.currentThread().getName());
         int i = (Integer.parseInt(Thread.currentThread().getName()))%2;
         flag[i] = false;
     }
