@@ -9,4 +9,5 @@ import kass.concurrente.invitados.InversionistaFiltro;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Bienvenidos al Hoyo de Kassandra");//Investiguen la referencia, quien la diga primero en discord, se lleva participacion
+    }
 }
