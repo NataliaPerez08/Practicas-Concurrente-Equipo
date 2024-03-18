@@ -48,5 +48,9 @@ public class TenedorImpl implements Tenedor {
     public void setVecesTomado(int vecesTomado) {
         this.vecesTomado = vecesTomado;
     }
-    
+
+    @Override
+    public String toString() {
+        return "TenedorImpl [id=" + id +"]";
+    }
 }

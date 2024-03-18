@@ -151,4 +151,9 @@ public abstract class Inversionista implements Runnable {
         this.vecesComido=vecesComido;
         
     }
+
+    @Override
+    public String toString(){
+        return "Inversionista [id=" + id + ", vecesComido=" + vecesComido + "]\n Tenedor Izq: "+tenedorL+"\n Tenedor Der: "+tenedorR;
+    }
 }
