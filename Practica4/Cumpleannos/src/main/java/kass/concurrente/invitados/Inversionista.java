@@ -34,8 +34,8 @@ public abstract class Inversionista implements Runnable {
          */
         for(int i=0;i<500;i++){
             try {
+                System.out.println("Inversionista "+id+" ingresando por "+i+" vez.");
                 piensa();
-
                 entraALaMesa();
                 //System.out.println("Inversionista "+id+" ingresando por "+i+" vez.");
                 

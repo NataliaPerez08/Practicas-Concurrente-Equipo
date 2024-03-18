@@ -28,16 +28,14 @@ public class InversionistaFiltro extends Inversionista {
     public void entraALaMesa() throws InterruptedException {
         
         tomaTenedores();
-        filtro.acquire();
         come();
         sueltaTenedores();
-        filtro.release();
 
     }
 
     @Override
     public void tomaTenedores() {
-
+        filtro.acquire();
         tenedorL.tomar();
         tenedorR.tomar();
        
@@ -52,6 +50,8 @@ public class InversionistaFiltro extends Inversionista {
 
         tenedorL.soltar();
         tenedorR.soltar();
+        filtro.release();
+
         /**
          * Aqui va tu codigo
          */
