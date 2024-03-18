@@ -33,7 +33,7 @@ public class InversionistaFiltro extends Inversionista {
         
         filtro.acquire();
         tenedorL.tomar();
-        tenedorR.tomar()
+        tenedorR.tomar();
     }
 
     @Override
