@@ -21,9 +21,10 @@ public class TenedorImpl implements Tenedor {
 
     @Override
     public void tomar() {
-        ++this.vecesTomado;
-        //System.out.println("Tenedor "+this.id+" tomado");
         candado.lock();
+        this.vecesTomado+=1;
+        //System.out.println("Tenedor "+this.id+" tomado");
+        
         
     }
 

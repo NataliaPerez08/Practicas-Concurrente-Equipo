@@ -35,9 +35,7 @@ public class Filtro implements Semaphore {
 
     @Override
     public void acquire() {
-        System.out.println("aquerido xd");
         int i = Integer.parseInt(Thread.currentThread().getName());
-        boolean existe_conflicto = true;
         for(int j = 1; j < level.length; ++j){
             level[i] = j;
             victim[j] = i;
@@ -58,8 +56,13 @@ public class Filtro implements Semaphore {
     public boolean existeConflicto(int i, int j){
         int numActualHilosConcurrentes = 0;
         for(int k = 0; k < level.length; ++k){
-            if((k != i) && (level[k] >= j) && (victim[j] == i)) numActualHilosConcurrentes++;
-            if(numActualHilosConcurrentes==maxHilosConcurrentes) return true;
+            if((k != i) && (level[k] >= j) && (victim[j] == i)) ++numActualHilosConcurrentes;
+            if(numActualHilosConcurrentes==maxHilosConcurrentes){
+                System.out.print("");
+                return true;
+                
+
+            } 
         }
         return false;
 
