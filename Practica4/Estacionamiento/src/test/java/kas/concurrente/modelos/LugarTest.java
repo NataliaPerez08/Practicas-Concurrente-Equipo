@@ -13,35 +13,33 @@ import org.junit.jupiter.api.Test;
 public class LugarTest {
     Semaphore semaforo;
     Lugar lugar;
-    List<Thread> hilos;
     static final int numHilos = 15;
 
     @BeforeEach
     void setUp() throws InterruptedException{
         lugar = new Lugar(1);
         semaforo = new Semaphore(1);
-        initHilos();
     }
 
     @Test
     void constructorTest(){
-        // Creamos un lugar con un id arbitrario para la prueba
-        Lugar lugar = new Lugar(1);
-        // Verificamos que el lugar esté disponible inicialmente
-        assertTrue(lugar.getId() == 1 && lugar.getDisponible());    
+        assertTrue(lugar.getId() == 1 && lugar.getDisponible() == true);
     }
 
     @Test
-    void estacionaTest() throws InterruptedException{
+    void estacionaTest() throws InterruptedException {
+        System.out.println("Estado inicial del lugar: " + lugar.getDisponible());
         lugar.estaciona();
-        assertTrue(lugar.getDisponible());
+        System.out.println("Estado del lugar después de estacionar: " + lugar.getDisponible());
+        if (lugar.getDisponible()) {
+            throw new AssertionError("El lugar debería estar no disponible después de estacionar un carro");
+        }
     }
-
+    
     /**
      * AGREGA 2 TEST MAS
      * TEST bien hechos
      */
 }
-
 
 
