@@ -15,10 +15,9 @@ public class EstacionamientoTest {
 
     @BeforeEach
     void setUp(){
-        es = new Estacionamiento(NUMLUGARES, 1); // Pasamos 1 como número de pisos para la prueba
-        initHilos();
+        es = new Estacionamiento(NUMLUGARES);
+        hilos = new ArrayList<>();
     }
-
 
     /**
      * Teste que revisa si tiene todos los lugares disponibles al iniciar
@@ -35,14 +34,16 @@ public class EstacionamientoTest {
     @Test
     void conteoVecesEstacionado() throws InterruptedException{
         for(int i = 0; i < NUMLUGARES; i++){
-            es.entraCarro(i); // Simulamos la entrada de un carro
+            es.asignaLugar(i);
         }
         assertEquals(NUMLUGARES, verificaVecesEstacionado());
     }
 
     @Test
     void conteoGlobalVecesEstacionado() throws InterruptedException{
-        for(Thread t : hilos){
+        for(int i = 0; i < NUMLUGARES; i++){
+            Thread t = new Thread(this::simulaCS,""+i);
+            hilos.add(t);
             t.start();
         }
 
@@ -53,28 +54,13 @@ public class EstacionamientoTest {
         assertEquals(NUMLUGARES*2,verificaVecesEstacionado());
     }
 
-    public int verificaVecesEstacionado() {
+    int verificaVecesEstacionado(){
         int res = 0;
-        for (int i = 0; i < es.getLugares().length; ++i) {
-            for (int j = 0; j < es.getLugares()[0].length; j++) {
-                res += es.getLugares()[i][j].getVecesEstacionado();
-            }
+        for(int i = 0; i < es.getLugares().length; ++i){
+            res += es.getLugares()[i].getVecesEstacionado();
         }
+
         return res;
-    }
-
-    /**
-     * AGREGA 2 TEST MAS
-     * TEST bien hechos
-     */
-
-    void initHilos(){
-        hilos = new ArrayList<>();
-
-        for(int i=0; i < NUMLUGARES*2; ++i){
-            Thread t = new Thread(this::simulaCS,""+i);
-            hilos.add(t);
-        }
     }
 
     void simulaCS() {
@@ -84,6 +70,10 @@ public class EstacionamientoTest {
         }catch(InterruptedException e){
             e.printStackTrace();
         }
-        
     }
+
+    /**
+     * AGREGA 2 TEST MAS
+     * TEST bien hechos
+     */
 }
