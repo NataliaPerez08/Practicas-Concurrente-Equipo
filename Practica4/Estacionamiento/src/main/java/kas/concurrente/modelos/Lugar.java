@@ -1,42 +1,21 @@
 package kas.concurrente.modelos;
 
-/**
- * Clase que modela un Lugar
- * El lugar consta de un id
- * un booleano que nos dice si esta dispoible
- * y un objeto del tipo Semaphore (El semaforo)
- * @author Kassandra Mirael
- * @version 1.0
- */
 import java.util.concurrent.Semaphore;
 
 public class Lugar {
-    private Integer id;
+    private final int id;
     private boolean disponible;
-    private Semaphore semaforo;
+    private final Semaphore semaforo;
     private int vecesEstacionado;
-
 
     public Lugar(int id) {
         this.id = id;
-        disponible = true;
-        semaforo = new Semaphore(1, true); // Semáforo débil
+        this.disponible = true;
+        this.semaforo = new Semaphore(1, true); // Semáforo débil
+        this.vecesEstacionado = 0;
     }
 
-    public void estaciona() throws InterruptedException {
-        semaforo.acquire();
-        disponible = false;
-        System.out.println("El carro ha sido estacionado en el lugar " + id);
-        semaforo.release();
-        vePorPastel();
-    }
-
-    public void vePorPastel() throws InterruptedException {
-        Thread.sleep((long) (Math.random() * 5000) + 1000); // Tiempo entre 1 y 5 segundos
-        System.out.println("El carro ha salido para comprar un pastel.");
-    }
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,6 +23,25 @@ public class Lugar {
         return disponible;
     }
 
+    public void estaciona() throws InterruptedException {
+        semaforo.acquire();
+        try {
+            if (disponible) {
+                disponible = false;
+                System.out.println("El carro ha estacionado en el lugar " + id);
+                vecesEstacionado++; // Incrementamos el contador
+            }
+        } finally {
+            semaforo.release();
+        }
+    }
+
+    public void vePorPastel() throws InterruptedException {
+        Thread.sleep((long) (Math.random() * 5000 + 1000));
+        System.out.println("El carro que estaba en el lugar " + id + " ha salido para ir por pastel.");
+    }
+
+    // Método para obtener el número de veces que se ha estacionado en este lugar
     public int getVecesEstacionado() {
         return vecesEstacionado;
     }
