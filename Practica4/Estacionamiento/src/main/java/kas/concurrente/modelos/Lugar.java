@@ -1,44 +1,50 @@
 package kas.concurrente.modelos;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
+/**
+ * Clase que modela un Lugar
+ * El lugar consta de un id
+ * un booleano que nos dice si esta dispoible
+ * y un objeto del tipo Semaphore (El semaforo)
+ * @author Kassandra Mirael
+ * @version 1.0
+ */
 import java.util.concurrent.Semaphore;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+public class Lugar {
+    private Integer id;
+    private boolean disponible;
+    private Semaphore semaforo;
+    private int vecesEstacionado;
 
-public class LugarTest {
-    Semaphore semaforo;
-    Lugar lugar;
-    List<Thread> hilos;
-    static final int numHilos = 15;
 
-    @BeforeEach
-    void setUp() throws InterruptedException{
-        lugar = new Lugar(1);
-        semaforo = new Semaphore(1);
+    public Lugar(int id) {
+        this.id = id;
+        disponible = true;
+        semaforo = new Semaphore(1, true); // Semáforo débil
     }
 
-    @Test
-  void constructorTest(){
-        // Creamos un lugar con un id arbitrario para la prueba
-        Lugar lugar = new Lugar(1);
-        // Verificamos que el lugar esté disponible inicialmente
-        assertTrue(lugar.getId() == 1 && lugar.getDisponible());
-     
+    public void estaciona() throws InterruptedException {
+        semaforo.acquire();
+        disponible = false;
+        System.out.println("El carro ha sido estacionado en el lugar " + id);
+        semaforo.release();
+        vePorPastel();
     }
 
-    @Test
-    void estacionaTest() throws InterruptedException{
-        lugar.estaciona();
-        assertTrue(lugar.getDisponible());
+    public void vePorPastel() throws InterruptedException {
+        Thread.sleep((long) (Math.random() * 5000) + 1000); // Tiempo entre 1 y 5 segundos
+        System.out.println("El carro ha salido para comprar un pastel.");
     }
 
-    /**
-     * AGREGA 2 TEST MAS
-     * TEST bien hechos
-     */
+    public Integer getId() {
+        return id;
+    }
+
+    public boolean getDisponible() {
+        return disponible;
+    }
+
+    public int getVecesEstacionado() {
+        return vecesEstacionado;
+    }
 }
