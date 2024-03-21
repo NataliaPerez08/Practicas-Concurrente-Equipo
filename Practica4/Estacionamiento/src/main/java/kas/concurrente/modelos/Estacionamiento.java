@@ -1,81 +1,89 @@
 package kas.concurrente.modelos;
 
-/**
- * En esta clase se simula el estacionamiento en si
- * Posee un conjunto de arreglos de tipo Lugar (o arreglo bidimensional?)
- * Posee un entero de lugaresDisponibles (Se podra hacer por pisos?) (Habra otra manera de hacerlo mejor?)
- * @author Kassandra Mirael
- * @version 1.0
- */
-import java.util.concurrent.Semaphore;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Estacionamiento {
-    private Lugar[][] lugares;
-    private int lugaresDisponibles;
-    private Semaphore mutex;
-    private Semaphore disponible;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Estacionamiento(int capacidad, int pisos) {
-        lugares = new Lugar[pisos][capacidad / pisos];
-        lugaresDisponibles = capacidad;
-        mutex = new Semaphore(1);
-        disponible = new Semaphore(capacidad);
-        inicializaLugares();
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class EstacionamientoTest {
+    Estacionamiento es;
+    final static int NUMLUGARES = 200;
+    List<Thread> hilos;
+
+    @BeforeEach
+    void setUp(){
+        es = new Estacionamiento(NUMLUGARES, 1); // Pasamos 1 como número de pisos para la prueba
+        initHilos();
     }
 
-    public Lugar[][] getLugares() {
-        return this.lugares;
+    /**
+     * Teste que revisa si tiene todos los lugares disponibles al iniciar
+     */
+    @Test
+    void lugaresDisponiblesITest(){
+        assertEquals(NUMLUGARES,es.getLugaresDisponibles());
     }
 
-    public int getLugaresDisponibles() {
-        try {
-            mutex.acquire();
-            int disponibles = lugaresDisponibles;
-            mutex.release();
-            return disponibles;
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            return -1;
+    /**
+     * Test que comprueba que el numero de veces que se estaciona sea correcto
+     * @throws InterruptedException
+     */
+    @Test
+    void conteoVecesEstacionado() throws InterruptedException{
+        for(int i = 0; i < NUMLUGARES; i++){
+            es.entraCarro(i); // Simulamos la entrada de un carro
         }
+        assertEquals(NUMLUGARES, verificaVecesEstacionado());
     }
 
-    public boolean estaLleno() {
-        try {
-            mutex.acquire();
-            boolean lleno = lugaresDisponibles == 0;
-            mutex.release();
-            return lleno;
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            return true;
+
+    @Test
+    void conteoGlobalVecesEstacionado() throws InterruptedException {
+        for (Thread t : hilos) {
+            t.start();
         }
+    
+        for (Thread t : hilos) {
+            t.join();
+        }
+    
+        assertEquals(NUMLUGARES * 2, verificaVecesEstacionado());
     }
-
-    public void inicializaLugares() {
-        for (int i = 0; i < lugares.length; i++) {
-            for (int j = 0; j < lugares[i].length; j++) {
-                lugares[i][j] = new Lugar(i * lugares[i].length + j);
+    
+    public int verificaVecesEstacionado() {
+        int res = 0;
+        for (int i = 0; i < es.getLugares().length; ++i) {
+            for (int j = 0; j < es.getLugares()[0].length; j++) {
+                res += es.getLugares()[i][j].getVecesEstacionado();
             }
         }
+        return res;
     }
 
-    public void entraCarro(int nombre) throws InterruptedException {
-        disponible.acquire();
-        int lugar = obtenLugar();
-        asignaLugar(lugar);
-        System.out.println("El carro " + nombre + " ha entrado al estacionamiento.");
-        disponible.release();
+    /**
+     * AGREGA 2 TEST MAS
+     * TEST bien hechos
+     */
+
+    void initHilos(){
+        hilos = new ArrayList<>();
+
+        for(int i=0; i < NUMLUGARES*2; ++i){
+            Thread t = new Thread(this::simulaCS,""+i);
+            hilos.add(t);
+        }
     }
 
-    public void asignaLugar(int lugar) throws InterruptedException {
-        int piso = lugar / lugares[0].length;
-        int espacio = lugar % lugares[0].length;
-        lugares[piso][espacio].estaciona();
-    }
-
-    public int obtenLugar() {
-        int randomPiso = (int) (Math.random() * lugares.length);
-        int randomEspacio = (int) (Math.random() * lugares[0].length);
-        return randomPiso * lugares[0].length + randomEspacio;
+    void simulaCS() {
+        try{
+            int id = Integer.parseInt(Thread.currentThread().getName());
+            es.entraCarro(id);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        
     }
 }
