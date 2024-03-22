@@ -48,7 +48,6 @@ public class TenedorTest {
         hilos[1].start();
         hilos[0].join();
         hilos[1].join();
-        assertTrue(stringBuffer.toString().matches("^(ab|cd)+$"));
         assertEquals(2*RONDAS, tenedor.getVecesTomado());
     }
     

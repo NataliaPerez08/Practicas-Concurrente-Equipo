@@ -35,7 +35,7 @@ public abstract class Inversionista implements Runnable {
                 entraALaMesa();
                 
 
-                System.out.println("Inversionista "+id+" ingresando por "+i+" vez. y comió por "+vecesComido+" vez.");
+                //System.out.println("Inversionista "+id+" ingresando por "+i+" vez. y comió por "+vecesComido+" vez.");
                 
             } catch (InterruptedException e) {
                 System.out.println("Fallo en hilo "+id);

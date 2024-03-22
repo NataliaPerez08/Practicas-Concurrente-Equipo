@@ -54,12 +54,6 @@ public class MesaTest {
         boolean comieronTodasLasVeces = true;
 
         for(Inversionista in : inversionistas){
-        System.out.println("--------------------------------------");
-        System.out.println("Inversionista: "+in.getId());
-        System.out.println("Veces comido="+in.getVecesComido());
-        System.out.println("Veces tomado tenedor Izq="+in.getTenedorIzq().getVecesTomado());
-        System.out.println("Veces tomado tenedor Der="+in.getTenedorDer().getVecesTomado());
-        System.out.println("--------------------------------------");
 
             comieronTodasLasVeces = comieronTodasLasVeces && (in.getVecesComido() >= VECES_COMIDOD_ESPERADO && 
             in.getVecesComido() <= in.getTenedorIzq().getVecesTomado() && 
