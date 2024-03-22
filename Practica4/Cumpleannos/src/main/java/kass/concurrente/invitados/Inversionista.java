@@ -19,12 +19,6 @@ public abstract class Inversionista implements Runnable {
     int id;
     int vecesComido=0;
     PetersonLock candado = new PetersonLock();
-
-    /*Inversionista(int id,Tenedor l, Tenedor r){
-        this.id = id;
-        tenedorL = l;
-        tenedorR = r;
-    }*/
     
 
     @Override
@@ -34,13 +28,17 @@ public abstract class Inversionista implements Runnable {
          * puesto en el test, agrega el valor aqui.
          */
         for(int i=0;i<500;i++){
+            
             try {
-                System.out.println("Inversionista "+id+" ingresando por "+i+" vez.");
+                
                 piensa();
                 entraALaMesa();
-                //System.out.println("Inversionista "+id+" ingresando por "+i+" vez.");
+                
+
+                System.out.println("Inversionista "+id+" ingresando por "+i+" vez. y comió por "+vecesComido+" vez.");
                 
             } catch (InterruptedException e) {
+                System.out.println("Fallo en hilo "+id);
             }
             
         }
@@ -72,14 +70,21 @@ public abstract class Inversionista implements Runnable {
      * Incrementa el numero de veces que ha comido.
      * @throws InterruptedException <Escribe porque se lanzaria esta exception>
      */
-    public void come() throws InterruptedException{
+    public void come() {
         /**
          * Aqui va tu codigo
          */
         
         //System.out.println("Inversionista "+this.id+" comiendo :p");
-        Thread.sleep(5);
+       
         vecesComido+=1;
+        try{
+            Thread.sleep(generaTiempoDeEspera());
+        }catch ( InterruptedException e){
+            System.out.println("Fue en comer");
+        }
+        
+        
         
     }
 
@@ -89,12 +94,17 @@ public abstract class Inversionista implements Runnable {
      * Esto pasa antes de que tome sus tenedores.
      * @throws InterruptedException <Escribe porque se lanzaria esta exception>
      */
-    public void piensa() throws InterruptedException {
+    public void piensa() {
         /**
          * Aqui va tu codigo
          */
         //System.out.println("Inversionista "+this.id+" pensando...");
-        Thread.sleep(this.generaTiempoDeEspera());
+        try{
+            Thread.sleep(generaTiempoDeEspera());
+        }catch ( InterruptedException e){
+            System.out.println("Fue en pensar");
+        }
+        
     }
 
     /**

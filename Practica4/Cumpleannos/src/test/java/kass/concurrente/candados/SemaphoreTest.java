@@ -28,10 +28,8 @@ public class SemaphoreTest {
     }
 
     void initFiltroSemaforo(){
-        System.out.println("hola");
 
         semaforo = new Filtro(HILOS, MAX_HILOS_CONCURRENTES);
-        System.out.println("hola");
     }
 
     void initThreads(){

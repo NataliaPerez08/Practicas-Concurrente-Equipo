@@ -11,9 +11,10 @@ import kass.concurrente.candados.Semaphore;
  * @author Kassandra Mirael
  */
 public class Filtro implements Semaphore {
-    int [] level;
-    int [] victim;
+    volatile int [] level;
+    volatile int [] victim;
     int maxHilosConcurrentes;
+    int hilos;
     /**
      * Constructor del Filtro
      * @param hilos El numero de Hilos Permitidos
@@ -23,6 +24,7 @@ public class Filtro implements Semaphore {
         this.maxHilosConcurrentes = maxHilosConcurrentes;
         level = new int[hilos];
         victim = new int[hilos];
+        this.hilos=hilos;
         for(int i = 0; i < hilos; ++i){
             level[i] = 0;
         }
@@ -35,7 +37,7 @@ public class Filtro implements Semaphore {
 
     @Override
     public void acquire() {
-        int i = Integer.parseInt(Thread.currentThread().getName());
+        int i = Integer.parseInt(Thread.currentThread().getName())%hilos;
         for(int j = 1; j < level.length; ++j){
             level[i] = j;
             victim[j] = i;
@@ -50,7 +52,7 @@ public class Filtro implements Semaphore {
 
 
             }
-        }   
+        }
     }
 
     public boolean existeConflicto(int i, int j){
@@ -58,7 +60,7 @@ public class Filtro implements Semaphore {
         for(int k = 0; k < level.length; ++k){
             if((k != i) && (level[k] >= j) && (victim[j] == i)) ++numActualHilosConcurrentes;
             if(numActualHilosConcurrentes==maxHilosConcurrentes){
-                System.out.print("");
+                
                 return true;
                 
 
@@ -70,7 +72,7 @@ public class Filtro implements Semaphore {
 
     @Override
     public void release() {
-        int i = Integer.parseInt(Thread.currentThread().getName());
+        int i = Integer.parseInt(Thread.currentThread().getName())%hilos;
         level[i] = 0;
        
         

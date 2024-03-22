@@ -23,14 +23,16 @@ public class InversionistaFiltro extends Inversionista {
     public void entraALaMesa() throws InterruptedException {
         
         tomaTenedores();
+        candado.lock();
         come();
+        candado.unlock();
         sueltaTenedores();
+
 
     }
 
     @Override
     public void tomaTenedores() {
-        
         filtro.acquire();
         tenedorL.tomar();
         tenedorR.tomar();
@@ -45,7 +47,8 @@ public class InversionistaFiltro extends Inversionista {
         filtro.release();
         tenedorL.soltar();
         tenedorR.soltar();
-        
+       
+
 
         /**
          * Aqui va tu codigo
