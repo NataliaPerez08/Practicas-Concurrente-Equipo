@@ -11,10 +11,13 @@ import kass.concurrente.candados.Lock;
  */
 public class PetersonLock implements Lock {
     // thread-local index, 0 or 1
-    private  boolean[] flag = new boolean[2];
+    private  volatile boolean[] flag = new boolean[2];
     private volatile int victim;
-    private volatile Filtro filtro = new Filtro(2, 1);
     
+    /**
+     * Metodo que bloquea el acceso a la
+     * seccion critica.
+     */
     @Override
     public void lock() {
         int i = (Integer.parseInt(Thread.currentThread().getName()))%2;
@@ -23,13 +26,16 @@ public class PetersonLock implements Lock {
         
         flag[i] = true;
         victim = i;
-        
         while (flag[j] && victim == i) {
             // wait
         }
 
     }
 
+    /**
+     * Metodo que desbloque el acceso a la
+     * seccion critica.
+     */
     @Override
     public void unlock() {
         int i = (Integer.parseInt(Thread.currentThread().getName()))%2;

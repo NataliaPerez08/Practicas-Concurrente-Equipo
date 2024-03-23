@@ -27,7 +27,7 @@ public abstract class Inversionista implements Runnable {
          * El inversionista debe pensar y entrar a la mesa un periodo de veces
          * puesto en el test, agrega el valor aqui.
          */
-        for(int i=0;i<500;i++){
+        for(int i=0;i<10;i++){
             
             try {
                 
@@ -68,7 +68,7 @@ public abstract class Inversionista implements Runnable {
      * El inversionista le toma un par de milisegundos comer.
      * ESTA ES LA SECCION CRITICA, SIGNIFICA PELIGRO
      * Incrementa el numero de veces que ha comido.
-     * @throws InterruptedException <Escribe porque se lanzaria esta exception>
+     * @throws InterruptedException esta exception se lanza porque se hace un sleep cuando come el inversionista
      */
     public void come() {
         /**
@@ -130,42 +130,70 @@ public abstract class Inversionista implements Runnable {
         return (long)i ;
     }
 
-    /*
-     * Rellena Getter and Setters primero
-     * Documenta los metodos.
-     * Cuando acabes borra estew comentario
+
+    /**
+     * Devuelve el id del inversionista
+     * @return int id que se posee.
      */
     public int getId(){
         return id;
     }
 
+    /**
+     * Cambia el id del inversionista
+     * @param id nuevo id del inversionista.
+     */
     public void setId(int id){
         this.id=id;
 
     }
 
+    /**
+     * Devuelve el tenedor izquierdo del inversionista
+     * @return Tenedor tenedor que el inversionista tiene a su izquierda.
+     */
     public Tenedor getTenedorIzq(){
         return tenedorL;
     }
 
+    /**
+     * Cambia el tenedor izquierdo del inversionista
+     * @param t nuevo tenedor izquierdo .
+     */
     public void setTenedorIzq(Tenedor t){
         tenedorL = t;
 
     }
 
+    /**
+     * Devuelve el tenedor izquierdo del inversionista
+     * @return Tenedor tenedor que el inversionista tiene a su izquierda.
+     */
     public Tenedor getTenedorDer(){
         return tenedorR;
     }
 
+    /**
+     * Cambia el tenedor derecho del inversionista
+     * @param t nuevo tenedor derecho .
+     */
     public void setTenedorDer(Tenedor t){
         tenedorR=t;
 
     }
 
+    /**
+     * Devuelve el número de veces que el inversionista ha comido.
+     * @return int veces que el inversionista ha comido hasta el momento.
+     */
     public int getVecesComido(){
         return vecesComido;
     }
 
+    /**
+     * Cambia el número de veces que el inversionista ha comido.
+     * @param vecesComido nuevo número de veces que el inversionista ha comido.
+     */
     public void setVecesComido(int vecesComido){
         this.vecesComido=vecesComido;
         

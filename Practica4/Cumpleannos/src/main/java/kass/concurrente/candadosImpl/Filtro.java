@@ -29,12 +29,20 @@ public class Filtro implements Semaphore {
             level[i] = 0;
         }
     }
-
+    
+    /**
+     * Metodo que nos retorna el numero de hilos permitidos
+     * dentro de la seccion critica.
+     * @return El numero de hilos permitido
+     */
     @Override
     public int getPermitsOnCriticalSection() {
         return maxHilosConcurrentes;
     }
-
+    
+    /**
+     * Metodo que adquiere el semaforo.
+     */
     @Override
     public void acquire() {
         int i = Integer.parseInt(Thread.currentThread().getName())%hilos;
@@ -54,7 +62,14 @@ public class Filtro implements Semaphore {
             }
         }
     }
-
+    
+    /**
+     * Metodo nos permite saber si ya se tiene el máximo de hilos conturrentes permitidos 
+     * para entrar a la sección crítica.
+     * @param i hilo actual
+     * @param j nivel en el que se encuentra el hilo.
+     * @return boolean true si ya hay maxHilosConcurrentes. false en caso contrario.
+     */
     public boolean existeConflicto(int i, int j){
         int numActualHilosConcurrentes = 0;
         for(int k = 0; k < level.length; ++k){
@@ -70,6 +85,9 @@ public class Filtro implements Semaphore {
 
     }
 
+    /**
+     * Metodo que libera el semaforo.
+     */
     @Override
     public void release() {
         int i = Integer.parseInt(Thread.currentThread().getName())%hilos;

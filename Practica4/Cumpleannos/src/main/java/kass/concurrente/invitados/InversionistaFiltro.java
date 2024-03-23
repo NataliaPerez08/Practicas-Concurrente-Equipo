@@ -19,6 +19,15 @@ public class InversionistaFiltro extends Inversionista {
         this.filtro = filtro;
     }
 
+    /**
+     * Metodo que nos permite entrar a la mesa.
+     * El inversionista por fin dejo de pensar y de escribir en su
+     * servilleta y se digna en entrar.
+     * PRIMERO toma los tenedores.
+     * DESPUES come.
+     * FINALMENTE los suelta para que los demas los puedan usar.
+     * @throws InterruptedException esta exception se lanza porque se hace un sleep cuando come el inversionista
+     */
     @Override
     public void entraALaMesa() throws InterruptedException {
         
@@ -31,28 +40,31 @@ public class InversionistaFiltro extends Inversionista {
 
     }
 
+    /**
+     * Metodo que nos permite tomar los tenedores.
+     * Los toma uno por uno.
+     */
     @Override
     public void tomaTenedores() {
         filtro.acquire();
         tenedorL.tomar();
         tenedorR.tomar();
 
-        /**
-         * Aqui va tu codigo
-         */
     }
 
+    /**
+     * Metodo que hace que el inversionista suelte ambos tenedores una vez
+     * que terminara de comer. 
+     * De esta manera otro los puede usar.
+     * Suelta los tenedores uno por uno.
+     */
     @Override
     public void sueltaTenedores() {
-        filtro.release();
+        
         tenedorL.soltar();
         tenedorR.soltar();
+        filtro.release();
        
-
-
-        /**
-         * Aqui va tu codigo
-         */
     }
     
 }
