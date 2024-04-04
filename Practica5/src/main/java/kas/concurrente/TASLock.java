@@ -7,7 +7,7 @@ public class TASLock implements Lock {
 
     @Override
     public void lock() {
-        while(state.getAndSet(true));
+        while(state.getAndSet(true)) {};
     }
 
     @Override

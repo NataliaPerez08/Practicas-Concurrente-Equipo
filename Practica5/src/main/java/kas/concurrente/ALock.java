@@ -1,23 +1,36 @@
 package kas.concurrente;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class ALock implements Lock{
+    ThreadLocal<Integer> mySloyIndex = new ThreadLocal<Integer>(){
+        @Override
+        protected Integer initialValue() {
+            return 0;
+        }
+    };
+    AtomicInteger tail;
+    volatile boolean[] flag;
+    int size;
 
     public ALock(int hilos){
-        /** 
-         * AQUI VA TU CODIGO DEL CONSTRUCTOR
-        */
+        size = hilos; // size = capacity
+        tail = new AtomicInteger(0);
+        flag = new boolean[hilos];
+        flag[0] = true;
     }
 
     @Override
     public void lock() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'lock'");
+        int slot = tail.getAndIncrement() % size;
+        mySloyIndex.set(slot);
+        while(!flag[slot]){};
     }
 
     @Override
     public void unlock() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'unlock'");
+        int slot = mySloyIndex.get();
+        flag[slot] = false;
+        flag[(slot + 1) % size] = true;
     }
-    
 }
