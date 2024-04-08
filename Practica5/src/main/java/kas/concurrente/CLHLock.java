@@ -8,29 +8,37 @@ public class CLHLock implements Lock {
     ThreadLocal<QNode> myPred;
     ThreadLocal<QNode> myNode;
     class QNode{
-        volatile boolean lokced = false;
+        volatile boolean locked = false;
     }
 
     public CLHLock(){
-        tail = new AtomicReference<>(null);
-        myNode = ThreadLocal.withInitial(QNode::new);
-        myNode = ThreadLocal.withInitial(null);
+        tail = new AtomicReference<QNode>(new QNode());
+        myNode =new ThreadLocal<QNode>(){
+            protected QNode initialValue(){
+                return new QNode();
+            }
+        };
+        myPred =new  ThreadLocal<QNode>(){
+            protected QNode initialValue(){
+                return null;
+            }
+        };
         
     }
 
     @Override
     public void lock() {
         QNode qnode = myNode.get();
-        qnode.lokced = true;
+        qnode.locked = true;
         QNode pred = tail.getAndSet(qnode);
         myPred.set(pred);
-        while(pred.lokced){}
+        while(pred.locked){}
     }
 
     @Override
     public void unlock() {
         QNode qnode = myNode.get();
-        qnode.lokced = false;
+        qnode.locked = false;
         myNode.set(myPred.get());
         
     }
