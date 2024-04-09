@@ -1,5 +1,6 @@
 package kas.concurrente;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class CLHLock implements Lock {
@@ -9,6 +10,7 @@ public class CLHLock implements Lock {
     ThreadLocal<QNode> myNode;
     class QNode{
         volatile boolean locked = false;
+
     }
 
     public CLHLock(){
@@ -32,7 +34,9 @@ public class CLHLock implements Lock {
         qnode.locked = true;
         QNode pred = tail.getAndSet(qnode);
         myPred.set(pred);
-        while(pred.locked){}
+        while(pred.locked){
+            Thread.yield();
+        }
     }
 
     @Override
