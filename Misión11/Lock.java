@@ -1,5 +1,3 @@
-package kass.concurrente.candados;
-
 /**
  * Interfaz que modela un candado
  * @version 1.0

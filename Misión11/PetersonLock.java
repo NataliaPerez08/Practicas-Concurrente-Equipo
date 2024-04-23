@@ -1,7 +1,3 @@
-package kass.concurrente.candadosImpl;
-
-import kass.concurrente.candados.Lock;
-
 /**
  * Clase que implementa el candado usando el Legendario
  * algoritmo de PeterGod.
@@ -32,5 +28,16 @@ public class PetersonLock implements Lock {
         System.out.println("Unlocking. Hilo: "+Thread.currentThread().getName());
         int i = (Integer.parseInt(Thread.currentThread().getName()))%2;
         flag[i] = false;
+    }
+
+    @Override
+    public String toString() {
+        String bandera = "";
+        if(flag[0]){
+            bandera += "1";
+        }else{
+            bandera += "0";
+        }
+        return "PetersonLock{" + "flag=" + bandera + ", victim=" + victim + '}';
     }
 }
