@@ -68,4 +68,27 @@ public class PetersonLockTree implements Tree{
             return "";
         return toString(node.left) + node.lock + " " + toString(node.right);
     }
+
+    public void tomaCandado(){
+        tomaCandado(root);
+    }
+    private void tomaCandado(Node node){
+        System.out.println();
+        if (node == null)
+            return;
+        node.lock.lock();
+        tomaCandado(node.left);
+        tomaCandado(node.right);
+    }
+
+    public void sueltaCandado(){
+        sueltaCandado(root);
+    }
+    private void sueltaCandado(Node node){
+        if (node == null)
+            return;
+        node.lock.sueltaCandado();
+        sueltaCandado(node.left);
+        sueltaCandado(node.right);
+    }
 }
