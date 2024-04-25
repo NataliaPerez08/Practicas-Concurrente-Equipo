@@ -35,11 +35,6 @@ public class Util {
             e.printStackTrace();
         }
     }
-
-    public static void crearArchivoUtil() {
-        String contenido = "public class Util {\n\n}";
-        guardarArchivo(contenido, "Util.java");
-    }
 }
 
 
