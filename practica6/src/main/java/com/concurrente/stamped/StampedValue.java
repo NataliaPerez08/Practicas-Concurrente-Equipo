@@ -38,3 +38,4 @@ public class StampedValue<T> {
                 ", value=" + value +
                 '}';
     }
+}

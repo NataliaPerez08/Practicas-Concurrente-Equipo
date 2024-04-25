@@ -1,10 +1,12 @@
 package com.concurrente.snapshotsImp;
 
 import com.concurrente.snapshots.Snapshot;
+import com.concurrente.stamped.StampedSnap;
 
 public class WFS<T> implements Snapshot<T> {
 
     private StampedSnap<T>[] a_table;
+
     public WFS(int capacity, T init){
         a_table = (StampedSnap<T>[]) new StampedSnap[capacity];
         for(int i = 0; i< capacity; i++){
