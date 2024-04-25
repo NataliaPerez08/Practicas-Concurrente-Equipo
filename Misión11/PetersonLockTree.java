@@ -73,9 +73,10 @@ public class PetersonLockTree implements Tree{
         tomaCandado(root);
     }
     private void tomaCandado(Node node){
-        System.out.println();
         if (node == null)
             return;
+        System.out.println("Toma candado "+node.lock.hashCode()
+        +" "+Thread.currentThread().getName()+"\n");
         node.lock.lock();
         tomaCandado(node.left);
         tomaCandado(node.right);
@@ -87,7 +88,7 @@ public class PetersonLockTree implements Tree{
     private void sueltaCandado(Node node){
         if (node == null)
             return;
-        node.lock.sueltaCandado();
+        node.lock.unlock(); 
         sueltaCandado(node.left);
         sueltaCandado(node.right);
     }
