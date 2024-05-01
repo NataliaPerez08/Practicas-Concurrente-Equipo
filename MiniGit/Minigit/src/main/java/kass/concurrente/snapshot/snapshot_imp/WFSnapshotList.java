@@ -1,17 +1,18 @@
 package kass.concurrente.snapshot.snapshot_imp;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import kass.concurrente.snapshot.Snapshot;
 import kass.concurrente.stamped.StampedSnap;
 
 /**
  * Clase generica que modela una Snapshot que implementa la interfaz Snapshot
- * @author
+ * @author 3 cores
  */
-public class WFSnapshotArray<T> implements Snapshot<T> {
+public class WFSnapshotList<T> implements Snapshot<T> {
     // Tabla de valores
-    private StampedSnap<T>[] aTable;
+    private List<StampedSnap<T>> aTable;
     // Valor inicial
     private T init;
 
@@ -21,13 +22,12 @@ public class WFSnapshotArray<T> implements Snapshot<T> {
      * @param capacidad la capacidad maxima de valores a guardar.
      * @param inicial el valor inicial a guardar.
      */
-    @SuppressWarnings("unchecked")
-    public WFSnapshotArray(Integer capacity, T init){
-        this.aTable = new StampedSnap[capacity];
+    public WFSnapshotList(Integer capacity, T init){
+        aTable = new ArrayList<>();
         this.init = init;
 
-        for(Integer i = 0; i < this.aTable.length; i++){
-            this.aTable[i] = new StampedSnap<>(init);
+        for(Integer i = 0; i < capacity; i++){
+            this.aTable.add(new StampedSnap<>(init));
         }
     }
 
@@ -39,30 +39,13 @@ public class WFSnapshotArray<T> implements Snapshot<T> {
     @Override
     public void update(T value) {
         Integer id = Integer.parseInt(Thread.currentThread().getName());
-        if (id >= this.aTable.length) {
-            expandirArreglo();
+        while (this.aTable.size() <= id) {
+            this.aTable.add(new StampedSnap<>(this.init));
         }
-        T[] snap = scan();
-        StampedSnap<T> oldValue = this.aTable[id];
+        ArrayList<T> snap = scan();
+        StampedSnap<T> oldValue = this.aTable.get(id);
         StampedSnap<T> newValue = new StampedSnap<>(oldValue.getStamp()+1, value, snap);
-        this.aTable[id] = newValue;
-    }
-
-    /**
-     * Metodo auxiliar que aumenta el tamanio al doble de aTable,
-     * cuando este se queda sin espacio.
-     */
-    @SuppressWarnings("unchecked")
-    private void expandirArreglo() {
-        StampedSnap<T>[] nuevoArraglo = new StampedSnap[this.aTable.length * 2];
-        for (int i = 0; i < this.aTable.length; i++) {
-            if (i <= this.aTable.length) {
-                nuevoArraglo[i] = this.aTable[i];
-            } else {
-                nuevoArraglo[i] = new StampedSnap<>(this.init);
-            }
-        }
-        this.aTable = nuevoArraglo;
+        this.aTable.set(id, newValue);
     }
 
     /**
@@ -72,14 +55,14 @@ public class WFSnapshotArray<T> implements Snapshot<T> {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public T[] scan() {
+    public ArrayList<T> scan() {
         StampedSnap<T>[] oldCopy;
         StampedSnap<T>[] newCopy;
-        Boolean[] moved = new Boolean[this.aTable.length];
+        Boolean[] moved = new Boolean[this.aTable.size()];
         oldCopy = collect();
         collect : while(true){
             newCopy = collect();
-            for(Integer j = 0; j < this.aTable.length; j++){
+            for(Integer j = 0; j < this.aTable.size(); j++){
                 if(oldCopy[j].getStamp() != newCopy[j].getStamp()){
                     if(moved[j].equals(true)){
                         return oldCopy[j].getSnap();
@@ -90,9 +73,9 @@ public class WFSnapshotArray<T> implements Snapshot<T> {
                     }
                 }
             }
-            T[] result = (T[]) new Object[this.aTable.length];
-            for(Integer j = 0; j < this.aTable.length; j++){
-                result[j] = newCopy[j].getValue();
+            ArrayList<T> result = new ArrayList<>();
+            for(Integer j = 0; j < this.aTable.size(); j++){
+                result.add( newCopy[j].getValue());
             }
             return result;
         }
@@ -102,15 +85,20 @@ public class WFSnapshotArray<T> implements Snapshot<T> {
      * Metodo que obtiene una copia de los valores del arreglo
      * @return La copia de los valores del arreglo
      */
+    @SuppressWarnings("unchecked")
     private StampedSnap<T>[] collect(){
-        return Arrays.copyOf(this.aTable, this.aTable.length);
+        StampedSnap<T>[] copia = (StampedSnap<T>[]) new Object[this.aTable.size()];
+        for(Integer i = 0; i < this.aTable.size(); i++){
+            copia[i] = this.aTable.get(i);
+        }
+        return copia;
     }
 
     /**
      * Regresa la tabla de valores.
      * @return la tabla de valores.
      */
-    public StampedSnap<T>[] getATable(){
+    public List<StampedSnap<T>> getATable(){
         return this.aTable;
     }
 
@@ -120,6 +108,6 @@ public class WFSnapshotArray<T> implements Snapshot<T> {
      * @return el valor que esta en la posicion indicada.
      */
     public T getStampedSnap(Integer position){
-        return this.aTable[position].getValue();
+        return this.aTable.get(position).getValue();
     }
 }
